@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title>为什么写博客</title>
-      <link href="/2018/11/28/why-blog/"/>
-      <url>/2018/11/28/why-blog/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p><strong><em>刘未鹏 —— 《暗时间》</em></strong><br>写一个博客有很多的好处，却没有任何明显的坏处。更明确的说：用博客的形式来记录下你有价值的思考，会带来很多好处，却没有任何明显的坏处。写一个长期的价值博客最大的几点好处:  </p><ol><li>能够交到很多志同道合的朋友。 书写是为了更好地思考。 </li><li>“教”是最好的“学”。如果一件事情你不能讲清楚，十有八九你还没有完全理解。</li><li>激励你去持续学习和思考。</li><li>学会持之以恒地做一件事情。</li><li>一个长期的价值博客是一份很好的简历。</li></ol></blockquote><p>路漫漫其修远兮，吾将上下而求索。谨以博客记录算法菜鸟的“攻城狮”之路。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[Hello World——利用hexo和github快速搭建个人博客]]></title>
+    <url>%2F2018%2F12%2F01%2Fhello_world%2F</url>
+    <content type="text"><![CDATA[一、hexo和github简介 Hexo 生成静态网页，Github 托管网页，Markdown 编辑博客。 1. hexo是什么？Hexo 是一款基于 Node.js 语言、快速、简洁且高效的博客框架。通过使用Markdown（或其他渲染引擎）解析文章，即使是前端小白也可利用 hexo 框架的靓丽主题快速生成相当专业的静态网页。 2. github是什么？GitHub 是一个面向开源及私有软件项目的托管平台，除了git 代码仓库托管及基本的 Web 管理界面以外，还提供了订阅、讨论组、文本渲染、在线文件编辑器、协作图谱（报表）、代码片段分享（Gist）等功能，是当前最活跃的“程序猿交友平台”。 3. markdown是什么？Markdown Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。Markdown的语法简洁易学，功能比纯文本更强大，世界上最流行的博客平台 WordPress 能很好的支持Markdown。 二、搭建博客环境1. 安装 Node.jsHexo 博客框架基于 Node.js 语言，首先下载 Node.js安装包，选择对应的版本进行安装。默认安装过程会配置环境变量及 npm 包，安装完成后在命令窗口（例如 windows 系统的 cmd 窗口）输入 node -v 即可验证是否安装成功。 2. 安装 GitGit 是开源的分布式版本控制系统，可以将本地编辑完成的博客同步到 Github 服务器上。首先下载 Git安装包，安装完成后在命令窗口输入 git -v 即可验证是否安装成功。 3. 安装 HexoHexo是个人博客网站的框架，安装步骤参考 官网文档。首先在本地建立名为blog的文件夹（文件夹名任意），然后在blog文件夹当前路径下开启命令窗口，通过 npm 命令即可完成安装。1$ npm install -g hexo-cli 安装完成后，在命令窗口中初始化博客。1$ hexo init blog 初始化完成后，分别下述命令检测博客环境是否正常。12$ hexo generate # 生成博客$ hexo server # 启动本地服务器 hexo 3.0把服务器独立成个别模块，需要单独安装npm i hexo-server。如果没有报错，接下来就是见证奇迹的时刻了。在浏览器中输入网址 http://localhost:4000，就可以看到诞生的第一篇博客。 4. 上传到 Github首先到 官网注册，假定注册的用户名为 user_name，注册的邮箱为 user_email，然后创建一个仓库，设置该仓库的主页面，得到你的github主页面网址 http://user_name.github.io。其他用户在浏览器中输入该网址，就能看到你的主页面。最后编辑站点配置文件 /blog/_config.yml，在该文件的末尾加入：1234deploy: type: git repository: https://github.com/user_name/user_name.github.io branch: master 在命令窗口运行代码 npm install hexo-deployer-git --save 安装 git 命令部署插件后，执行如下代码：123456$ git config --global user.name "user_name" # 指定 git 上传的仓库$ git config --global user.email user_email$ hexo clean # 清理缓存$ hexo generate # 生成博客$ hexo deploy # 同步到 github 主页面 5. 绑定个人域名6. 图床加速7. Markdown 编辑工具当前有许多好用的 Markdown 编辑工具，有的收费，有的免费，相对而言收费工具的体验较好。Markdown 文件的后缀名为.md，对于一名程序员来说，最友好的Markdown 编辑界面当然是 IDE 自带的 Markdown 编辑插件。在 Pycharm 中添加 Markdown 插件的步骤如下，File-&gt;Settings-&gt;Plugins-&gt;Install JetBrains Plugins-&gt;输入Markdown-&gt;选择插件-&gt;Install-&gt;安装完成后重启PyCharm。编辑界面如下图所示，黑色背景，支持预览，所见即所得。 Pycharm Markdown 插件编辑效果图 在 VSCodescode 中支持 Markdown 语法，只需要下载 Markdown 预览插件即可。在 VSCode 中添加插件的步骤如下，选择左边栏第四个图标 Extensions，在输入框搜索 Markdown Preview Enhanced，安装成功后重启 VSCode。编辑界面如下图所示，黑色背景，支持预览，所见即所得。]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[为什么写博客]]></title>
+    <url>%2F2018%2F11%2F28%2Fwhy-blog%2F</url>
+    <content type="text"><![CDATA[刘未鹏 —— 《暗时间》写一个博客有很多的好处，却没有任何明显的坏处。更明确的说：用博客的形式来记录下你有价值的思考，会带来很多好处，却没有任何明显的坏处。写一个长期的价值博客最大的几点好处: 能够交到很多志同道合的朋友。 书写是为了更好地思考。 “教”是最好的“学”。如果一件事情你不能讲清楚，十有八九你还没有完全理解。 激励你去持续学习和思考。 学会持之以恒地做一件事情。 一个长期的价值博客是一份很好的简历。 路漫漫其修远兮，谨以博客记录算法菜鸟的“攻城狮”之路。]]></content>
+  </entry>
 </search>
