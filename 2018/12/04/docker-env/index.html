@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/butterfly_128.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/butterfly_64.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="centoe7 深度学习环境,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 什么是 Docker 解决 “在我的机器上可以正常工作，为什么在你的机器上不能工作” 的问题。    随着深度学习技术的飞速发展，各种深度学习框架都有大量的粉丝。如何在一台电脑上安装多个深度学习框架？同一深度学习框架的不同版本依赖于不同的GPU版本，但是一台服务器只可能安装唯一版本的GPU。当多名开发人员在统一服务器上使用不同的深度学习框架进行开发时，往往会产生环境冲突。最好的解决方案就是采">
+<meta name="keywords" content="centoe7 深度学习环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7使用Docker快速搭建深度学习环境">
+<meta property="og:url" content="http://zhongneng.github.io/2018/12/04/docker-env/index.html">
+<meta property="og:site_name" content="旅途札记">
+<meta property="og:description" content="1. 什么是 Docker 解决 “在我的机器上可以正常工作，为什么在你的机器上不能工作” 的问题。    随着深度学习技术的飞速发展，各种深度学习框架都有大量的粉丝。如何在一台电脑上安装多个深度学习框架？同一深度学习框架的不同版本依赖于不同的GPU版本，但是一台服务器只可能安装唯一版本的GPU。当多名开发人员在统一服务器上使用不同的深度学习框架进行开发时，往往会产生环境冲突。最好的解决方案就是采">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhongneng.github.io/2018/12/04/docker-env/anaconda.png">
+<meta property="og:updated_time" content="2018-12-04T02:30:56.440Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos7使用Docker快速搭建深度学习环境">
+<meta name="twitter:description" content="1. 什么是 Docker 解决 “在我的机器上可以正常工作，为什么在你的机器上不能工作” 的问题。    随着深度学习技术的飞速发展，各种深度学习框架都有大量的粉丝。如何在一台电脑上安装多个深度学习框架？同一深度学习框架的不同版本依赖于不同的GPU版本，但是一台服务器只可能安装唯一版本的GPU。当多名开发人员在统一服务器上使用不同的深度学习框架进行开发时，往往会产生环境冲突。最好的解决方案就是采">
+<meta name="twitter:image" content="http://zhongneng.github.io/2018/12/04/docker-env/anaconda.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhongneng.github.io/2018/12/04/docker-env/">
+
+
+
+
+
+  <title>Centos7使用Docker快速搭建深度学习环境 | 旅途札记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旅途札记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">算法菜鸟的攻城狮之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhongneng.github.io/2018/12/04/docker-env/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhong Neng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/picture.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅途札记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Centos7使用Docker快速搭建深度学习环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-04T19:09:16+08:00">
+                2018-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/安装教程/" itemprop="url" rel="index">
+                    <span itemprop="name">安装教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-什么是-Docker"><a href="#1-什么是-Docker" class="headerlink" title="1. 什么是 Docker"></a>1. 什么是 Docker</h1><blockquote>
+<p>解决 “在我的机器上可以正常工作，为什么在你的机器上不能工作” 的问题。  </p>
+</blockquote>
+<p>随着深度学习技术的飞速发展，各种深度学习框架都有大量的粉丝。如何在一台电脑上安装多个深度学习框架？同一深度学习框架的不同版本依赖于不同的GPU版本，但是一台服务器只可能安装唯一版本的GPU。当多名开发人员在统一服务器上使用不同的深度学习框架进行开发时，往往会产生环境冲突。最好的解决方案就是采用虚拟技术。  </p>
+<p><a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> 是世界领先的软件容器平台，也是目前最流行的 Linux 容器解决方案。Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样。有了 Docker，就不用担心环境问题。而且 Docker 的接口相当简单，用户可以方便地创建和使用容器，把自己的应用放入容器。容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样。和虚拟机相比，由于没有臃肿的从操作系统，Docker可以节省大量的磁盘空间以及其他系统资源。  </p>
+<blockquote>
+<p>虚拟机通常用于彻底隔离整个运行环境。例如，云服务提供商通常采用虚拟机技术隔离不同的用户。而Docker通常用于隔离不同的应用，例如前端，后端以及数据库。</p>
+</blockquote>
+<h1 id="2-安装-Docker"><a href="#2-安装-Docker" class="headerlink" title="2. 安装 Docker"></a>2. 安装 <a href="https://docs.docker.com/install/linux/docker-ce/centos/" target="_blank" rel="noopener">Docker</a></h1><p>(a) 安装依赖包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y yum-utils device-mapper-persistent-data</span><br></pre></td></tr></table></figure></p>
+<p>(b) 配置稳定仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure></p>
+<p>(c) 安装(默认为最新版)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install docker-ce</span><br></pre></td></tr></table></figure></p>
+<p>(4) 修改docker运行时的根目录, 解决存储不足的问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /lib/systemd/system/docker.service </span><br><span class="line"><span class="comment"># 在 ExecStart=/usr/bin/dockerd 后添加 --graph=/home/docker</span></span><br><span class="line">$ ExecStart=/usr/bin/dockerd --graph=/home/docker</span><br></pre></td></tr></table></figure></p>
+<p>(5) 重新启动docker服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl daemon-reload</span><br><span class="line">$ systemctl status docker</span><br><span class="line">$ systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<p>(7) 测试Docker是否正确安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$  docker version</span><br><span class="line">$  docker run hello-world</span><br></pre></td></tr></table></figure></p>
+<h1 id="3-安装-nvidia-docker"><a href="#3-安装-nvidia-docker" class="headerlink" title="3. 安装 nvidia-docker"></a>3. 安装 <a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">nvidia-docker</a></h1><p>深度学习框架需要使用 GPU 加入计算，如果不安装 nvidia-docker 工具，那么在容器中将会无法调用宿主机上的 GPU 硬件设备。  </p>
+<p>(a) 移除旧版本 nvidia-GPU 和已经存在的 GPU 容器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume ls -q -f driver=nvidia-docker | xargs -r -I&#123;&#125; -n1 docker ps -q -a -f volume=&#123;&#125; | xargs -r docker rm -f</span><br><span class="line">$ sudo yum remove nvidia-docker</span><br></pre></td></tr></table></figure></p>
+<p>(b) 安装依赖包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ distribution=$(. /etc/os-release;<span class="built_in">echo</span> <span class="variable">$ID</span><span class="variable">$VERSION_ID</span>)</span><br><span class="line">$ curl -s -L https://nvidia.github.io/nvidia-docker/<span class="variable">$distribution</span>/nvidia-docker.repo | \ sudo tee /etc/yum.repos.d/nvidia-docker.repo</span><br></pre></td></tr></table></figure></p>
+<p>(c) 安装nvidia-docker<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y nvidia-docker2</span><br><span class="line">$ sudo pkill -SIGHUP dockerd</span><br></pre></td></tr></table></figure></p>
+<p>(d) 测试 nvidia-docker 是否安装成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-CUDA9-CUDNN7-python3-6-源码安装-Caffe、Caffe2、Tensorflow、-Detectron-和-Darknet"><a href="#4-CUDA9-CUDNN7-python3-6-源码安装-Caffe、Caffe2、Tensorflow、-Detectron-和-Darknet" class="headerlink" title="4. CUDA9-CUDNN7-python3.6 源码安装 Caffe、Caffe2、Tensorflow、 Detectron 和 Darknet"></a>4. CUDA9-CUDNN7-python3.6 源码安装 Caffe、Caffe2、Tensorflow、 Detectron 和 Darknet</h1><p>(a) 启动 GPU container 并登录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nvidia-docker run -tid --name TestMyGPU --net=<span class="string">'host'</span> nvidia/cuda:9.0-cudnn7-devel-centos7 /bin/bash <span class="comment"># 启动容器</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it TestMyGPU /bin/bash <span class="comment"># 登录容器</span></span><br></pre></td></tr></table></figure></p>
+<p>(b) 配置变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> http_proxy=http://192.168.71.33:8080 <span class="comment"># 设置网络</span></span><br><span class="line">$ <span class="built_in">export</span> https_proxy=https://192.168.71.33:8080</span><br><span class="line">$ <span class="built_in">export</span> PYINSTALL=/usr/<span class="built_in">local</span>/python3 <span class="comment"># 设置python3.6安装路径</span></span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PYINSTALL</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></p>
+<p>(c) 安装 python3.6 和 Caffe，参照上一篇博客 <code>Centos7 安装 Caffe</code>。</p>
+<p>(d) 在 <code>/home</code> 下安装 Caffe2、Tensorflow、 Detectron 和 Darknet</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖包和 opencv</span></span><br><span class="line">$ yum install -y cmake3 &amp;&amp; pip3 install cython opencv-python==3.4.2.16</span><br><span class="line"><span class="comment"># 安装 nccl，GPU分布式通信函数库</span></span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/NVIDIA/nccl.git </span><br><span class="line">$ <span class="built_in">cd</span> nccl &amp;&amp; make -j8 src.build CUDA_HOME=<span class="string">'/usr/local/cuda-9.0/'</span> NVCC_GENCODE=<span class="string">"-gencode=arch=compute_70,code=sm_70"</span> </span><br><span class="line">$ yum install -y rpm-build rpmdevtools &amp;&amp; make -j8 pkg.redhat.build &amp;&amp; make install </span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib'</span> &gt;&gt; /root/.bashrc </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf nccl &amp;&amp; <span class="built_in">source</span>  ~/.bashrc </span><br><span class="line"><span class="comment"># 验证nccl是否安装成功</span></span><br><span class="line"><span class="comment"># cd /home &amp;&amp; git clone https://github.com/NVIDIA/nccl-tests.git \</span></span><br><span class="line"><span class="comment"># cd nccl-tests &amp;&amp; make -j8 &amp;&amp; ./build/all_reduce_perf -b 8 -e 256M -f 2 -g 1 \</span></span><br><span class="line"><span class="comment"># cd /home &amp;&amp; rm -rf nccl-tests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 darknet</span></span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/pjreddie/darknet.git &amp;&amp; <span class="built_in">cd</span> darknet \</span><br><span class="line"><span class="comment"># 修改 Makefile 文件，令 GPU=1，CUDNN=1，OPENCV=1</span></span><br><span class="line">$ sed -i <span class="string">'s/GPU=0/GPU=1/'</span> Makefile </span><br><span class="line">$ sed -i <span class="string">'s/CUDNN=0/CUDNN=1/'</span> Makefile </span><br><span class="line">$ sed -i <span class="string">'s/OPENCV=0/OPENCV=1/'</span> Makefile </span><br><span class="line">$ make -j32</span><br><span class="line"><span class="comment"># 验证 darknet 是否安装成功</span></span><br><span class="line"><span class="comment"># 执行 ./darknet 输出 usage: ./darknet &lt;function&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Tensorflow 和 Keras</span></span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; pip3 install tensorflow-gpu==1.10 keras==2.2.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装caffe2</span></span><br><span class="line">$ pip3 install pyyaml future hypothesis pydot </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/pytorch/pytorch.git </span><br><span class="line">$ <span class="built_in">cd</span> pytorch &amp;&amp; git submodule update --init --recursive </span><br><span class="line"><span class="comment"># 解决编译时 cmake 的版本问题：</span></span><br><span class="line"><span class="comment"># 将文件 `pytorch/tools/build_pytorch_libs.sh` 复制到 `/home` 路径下</span></span><br><span class="line"><span class="comment"># 修改./tools/build_pytorch_libs.sh 第31和32行 CMAKE_VERSION、CMAKE3_VERSION</span></span><br><span class="line"><span class="comment"># CMAKE_VERSION=$(cmake --version | grep 'version' | awk '&#123;print $3&#125;' | awk -F. '&#123;print $1"."$2"."$3&#125;')</span></span><br><span class="line"><span class="comment"># CMAKE3_VERSION=$(cmake3 --version | grep 'version' | awk '&#123;print $3&#125;' | awk -F. '&#123;print $1"."$2"."$3&#125;')</span></span><br><span class="line">$ rm -f /home/pytorch/tools/build_pytorch_libs.sh</span><br><span class="line">$ cp -f /home/build_pytorch_libs.sh /home/pytorch/tools/build_pytorch_libs.sh</span><br><span class="line">$ rm -f /home/build_pytorch_libs.sh </span><br><span class="line">$ python setup.py install </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf pytorch</span><br></pre></td></tr></table></figure>
+<p>验证 caffe2 是否安装成功， python 命令窗口执行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> torch</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> caffe2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exit()</span><br></pre></td></tr></table></figure></p>
+<p>验证是否能使用 GPU<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; python -c <span class="string">'from caffe2.python import core'</span> 2&gt;/dev/null &amp;&amp; <span class="built_in">echo</span> <span class="string">"Success"</span> || <span class="built_in">echo</span> <span class="string">"Failure"</span></span><br><span class="line">$ python -c <span class="string">'from caffe2.python import workspace; print(workspace.NumCudaDevices())'</span></span><br><span class="line">$ python /usr/<span class="built_in">local</span>/anaconda3/lib/python3.6/site-packages/caffe2/python/operator_test/rnn_cell_test.py</span><br></pre></td></tr></table></figure></p>
+<p>安装 COCO-API<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span>  https://github.com/pdollar/coco </span><br><span class="line">$ pip3 install setuptools==18.4 &amp;&amp; yum install -y tkinter</span><br><span class="line">$ <span class="built_in">cd</span> coco/PythonAPI &amp;&amp; make -j8 &amp;&amp; make install &amp;&amp; python setup.py install </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf coco</span><br></pre></td></tr></table></figure></p>
+<p>验证 coco-api 是否安装成功, python命令窗口执行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pycocotools.coco <span class="keyword">import</span> COCO</span><br></pre></td></tr></table></figure></p>
+<p>安装detectron<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/facebookresearch/detectron </span><br><span class="line">$ <span class="built_in">cd</span> detectron &amp;&amp; make -j8 </span><br><span class="line"><span class="comment"># 验证 detectron 是否正确安装</span></span><br><span class="line">$ <span class="built_in">cd</span> /home/detectron &amp;&amp; python detectron/tests/test_spatial_narrow_as_op.py</span><br><span class="line">$ python tools/infer_simple.py \</span><br><span class="line">    --cfg configs/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml \</span><br><span class="line">    --output-dir tmp/detectron-visualizations \</span><br><span class="line">    --image-ext jpg \</span><br><span class="line">    --wts https://s3-us-west-2.amazonaws.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train:coco_2014_valminusminival/generalized_rcnn/model_final.pkl \</span><br><span class="line">    demo</span><br></pre></td></tr></table></figure></p>
+<h1 id="5-使用-Anaconda3-安装-Caffe、Pytorch-和-Tensorflow"><a href="#5-使用-Anaconda3-安装-Caffe、Pytorch-和-Tensorflow" class="headerlink" title="5. 使用 Anaconda3 安装 Caffe、Pytorch 和 Tensorflow"></a>5. 使用 Anaconda3 安装 Caffe、Pytorch 和 Tensorflow</h1><p><a href="https://www.anaconda.com/" target="_blank" rel="noopener">Anaconda</a> 是一个开源的Python发行版本，包含了conda、Python等180多个科学包及其依赖项，是当前最流行的 Python 数据科学开发平台。 因为包含了大量的科学包，Anaconda 的下载文件比较大（约 531 MB），如果只需要某些包，或者需要节省带宽或存储空间，也可以使用 <a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">Miniconda</a> 发行版 ( 仅包含 conda 和 Python )。</p>
+<div align="center"><img src="/2018/12/04/docker-env/anaconda.png" alt="anaconda wesite image" width="500" height="300"></div>
+
+<p>Anaconda 当前集成了 caffe 和 pytorch，可以利用 Anaconda 快速安装 caffe 和 caffe2 ( 集成在 pytorch ) 中。由于 Docker 容器需要应用程序占用内存尽可能小，因此采用 Miniconda 代替 Anaconda。完成的 Dockerfile 文件如下，在宿主机中含有 <code>Dockfile</code> 文件的当前路径下运行 <code>docker build -t deep_learning_environment:v0.1 .</code> 即可生成满足深度学习环境对应要求的镜像。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">FROM nvidia/cuda:9.0-cudnn7-runtime-centos7</span><br><span class="line"></span><br><span class="line">ENV LANG=en_US.UTF-8</span><br><span class="line">ARG http_proxy=http://192.168.71.33:8080</span><br><span class="line">ARG https_proxy=https://192.168.71.33:8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装Miniconda3</span></span><br><span class="line">RUN <span class="built_in">cd</span> /home \</span><br><span class="line">    <span class="comment"># 安装依赖包</span></span><br><span class="line">    &amp;&amp; yum install -y epel-release-7-11.noarch wget git make bzip2 &amp;&amp; pip install cython \</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 安装nccl</span></span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/NVIDIA/nccl.git \</span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> nccl &amp;&amp; make -j8 src.build CUDA_HOME=<span class="string">'/usr/local/cuda-9.0/'</span> NVCC_GENCODE=<span class="string">"-gencode=arch=compute_70,code=sm_70"</span> \</span><br><span class="line">    &amp;&amp; yum install -y rpm-build rpmdevtools &amp;&amp; make -j8 pkg.redhat.build &amp;&amp; make install \</span><br><span class="line">    &amp;&amp; <span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/nccl/build/lib'</span> &gt;&gt; /root/.bashrc \</span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> /home &amp;&amp; rm -rf nccl &amp;&amp; <span class="built_in">source</span>  ~/.bashrc \</span><br><span class="line">    <span class="comment"># 验证nccl是否安装成功</span></span><br><span class="line">    <span class="comment"># cd /home &amp;&amp; git clone https://github.com/NVIDIA/nccl-tests.git \</span></span><br><span class="line">    <span class="comment"># cd nccl-tests &amp;&amp; make -j8 &amp;&amp; ./build/all_reduce_perf -b 8 -e 256M -f 2 -g 1 \</span></span><br><span class="line">    <span class="comment"># cd /home &amp;&amp; rm -rf nccl-tests</span></span><br><span class="line"></span><br><span class="line">    &amp;&amp; wget https://repo.anaconda.com/miniconda/Miniconda3-4.3.30-Linux-x86_64.sh \</span><br><span class="line">    &amp;&amp; bash Miniconda3-4.3.30-Linux-x86_64.sh -p /usr/<span class="built_in">local</span>/miniconda3 -b \</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将 miniconda 添加到系统路径</span></span><br><span class="line">    &amp;&amp; <span class="built_in">echo</span> <span class="string">'export PATH=/usr/local/miniconda3/bin:$PATH'</span> &gt;&gt; /root/.bashrc \</span><br><span class="line">    &amp;&amp; <span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=/usr/local/miniconda3/lib:$LD_LIBRARY_PATH'</span> &gt;&gt; /root/.bashrc \</span><br><span class="line">    &amp;&amp; <span class="built_in">source</span>  ~/.bashrc &amp;&amp; rm -rf Miniconda3-4.3.30-Linux-x86_64.sh \</span><br><span class="line">    <span class="comment"># 修改yum的链接问题</span></span><br><span class="line">    &amp;&amp; ln -s -f /usr/lib64/liblzma.so.5 /usr/<span class="built_in">local</span>/miniconda3/lib/liblzma.so.5 \</span><br><span class="line"></span><br><span class="line">    <span class="comment"># conda 安装 caffe-gpu</span></span><br><span class="line">    &amp;&amp; conda install -y caffe-gpu protobuf \</span><br><span class="line">    <span class="comment"># conda 安装 caffe2</span></span><br><span class="line">    <span class="comment"># 直接安装下载速度非常慢，而且有可能失败</span></span><br><span class="line">    &amp;&amp; conda install -y pytorch-nightly -c pytorch \</span><br><span class="line">    &amp;&amp; pip install future hypothesis pydot \</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 验证 caffe 和 caffe2 是否安装成功</span></span><br><span class="line">    <span class="comment"># $ python &amp;&amp; import torch &amp;&amp; import caffe &amp;&amp; import caffe2</span></span><br><span class="line">    <span class="comment"># python -c 'from caffe2.python import core' 2&gt;/dev/null &amp;&amp; echo "Success" || echo "Failure"</span></span><br><span class="line">    <span class="comment"># python -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices())'</span></span><br><span class="line">    <span class="comment"># python /usr/local/anaconda3/lib/python3.6/site-packages/caffe2/python/operator_test/rnn_cell_test.py</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 安装 detectron</span></span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/facebookresearch/detectron \</span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> detectron &amp;&amp; pip install cython &amp;&amp; make -j8 \</span><br><span class="line">    <span class="comment"># 验证 detectron 是否安装正确</span></span><br><span class="line">    <span class="comment"># cd /home/detectron &amp;&amp; python detectron/tests/test_spatial_narrow_as_op.py</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 安装darknet, 从 github 上下载darknet源码, 修改 Makefile 文件，令 GPU=1，CUDNN=1，OPENCV=1。</span></span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/pjreddie/darknet.git &amp;&amp; <span class="built_in">cd</span> darknet \</span><br><span class="line">    &amp;&amp; sed -i <span class="string">'s/GPU=0/GPU=1/'</span> Makefile \</span><br><span class="line">    &amp;&amp; sed -i <span class="string">'s/CUDNN=0/CUDNN=1/'</span> Makefile \</span><br><span class="line">    &amp;&amp; sed -i <span class="string">'s/OPENCV=0/OPENCV=1/'</span> Makefile \</span><br><span class="line">    &amp;&amp; make -j8 \</span><br><span class="line">    <span class="comment"># 验证 darknet 是否安装成功</span></span><br><span class="line">    <span class="comment"># 执行 ./darknet 输出 usage: ./darknet &lt;function&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 安装tensorflow和keras</span></span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> /home &amp;&amp; pip install tensorflow-gpu==1.10 keras==2.2.0 -i https://pypi.douban.com/simple/ \</span><br><span class="line">    <span class="comment"># 验证 tensorflow 和 keras 是否安装成功</span></span><br><span class="line">    <span class="comment"># $ python &amp;&amp; import tensorflow &amp;&amp; import keras</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除 minicond3/pkgs 里面的安装包, 降低内存占用</span></span><br><span class="line">    &amp;&amp; <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/miniconda3/ &amp;&amp; rm -rf pkgs</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #458B00;font-size:14px;">-------------本文结束  感谢阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/centoe7-深度学习环境/" rel="tag"># centoe7 深度学习环境</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/03/centos-caffe/" rel="next" title="Centos7 安装 Caffe">
+                <i class="fa fa-chevron-left"></i> Centos7 安装 Caffe
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/picture.jpg" alt="Zhong Neng">
+            
+              <p class="site-author-name" itemprop="name">Zhong Neng</p>
+              <p class="site-description motion-element" itemprop="description">Machine Learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhongneng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhongneng.whu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-什么是-Docker"><span class="nav-text">1. 什么是 Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-安装-Docker"><span class="nav-text">2. 安装 Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-安装-nvidia-docker"><span class="nav-text">3. 安装 nvidia-docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-CUDA9-CUDNN7-python3-6-源码安装-Caffe、Caffe2、Tensorflow、-Detectron-和-Darknet"><span class="nav-text">4. CUDA9-CUDNN7-python3.6 源码安装 Caffe、Caffe2、Tensorflow、 Detectron 和 Darknet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-使用-Anaconda3-安装-Caffe、Pytorch-和-Tensorflow"><span class="nav-text">5. 使用 Anaconda3 安装 Caffe、Pytorch 和 Tensorflow</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhong Neng</span>
+
+  
+</div>
+
+<div id="days"></div>
+<script language="javascript">
+  function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+  }
+    BirthDay=new Date("11/11/2018 11:11:11");
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+  }
+  function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+  }
+  show_date_time();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('2');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+
+
+
