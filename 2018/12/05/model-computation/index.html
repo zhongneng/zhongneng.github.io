@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="centos caffe python3,">
+  <meta name="keywords" content="机器学习，深度学习，Machine Learning, Deep Learning">
 
 
 
@@ -77,18 +77,21 @@
 
 
 
-<meta name="description" content="1. Caffe 是什么Caffe 全称 Convolutional Architecture for Fast Feature Embedding，是一种常用的深度学习框架，主要应用在视频、图像处理方面的应用上。得益于RCNN框架的影响力，当前主流的目标检测模型 ( 例如 Faster-RCNN 和 SSD ) 的作者源码都是基于 Caffe 编写的。 2. Centos7 安装 Caffe虽然">
-<meta name="keywords" content="centos caffe python3">
+<meta name="description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：1y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos7 安装 Caffe">
-<meta property="og:url" content="http://zhongneng.github.io/2018/12/03/centos-caffe/index.html">
+<meta property="og:title" content="你的模型运行快吗？">
+<meta property="og:url" content="http://zhongneng.github.io/2018/12/05/model-computation/index.html">
 <meta property="og:site_name" content="旅途札记">
-<meta property="og:description" content="1. Caffe 是什么Caffe 全称 Convolutional Architecture for Fast Feature Embedding，是一种常用的深度学习框架，主要应用在视频、图像处理方面的应用上。得益于RCNN框架的影响力，当前主流的目标检测模型 ( 例如 Faster-RCNN 和 SSD ) 的作者源码都是基于 Caffe 编写的。 2. Centos7 安装 Caffe虽然">
+<meta property="og:description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：1y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-04T01:37:22.779Z">
+<meta property="og:image" content="http://zhongneng.github.io/2018/12/05/model-computation/convolution.png">
+<meta property="og:image" content="http://zhongneng.github.io/2018/12/05/model-computation/depthwise_convolution.png">
+<meta property="og:image" content="http://zhongneng.github.io/2018/12/05/model-computation/pointwise_convolution.png">
+<meta property="og:updated_time" content="2018-12-05T11:52:08.410Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos7 安装 Caffe">
-<meta name="twitter:description" content="1. Caffe 是什么Caffe 全称 Convolutional Architecture for Fast Feature Embedding，是一种常用的深度学习框架，主要应用在视频、图像处理方面的应用上。得益于RCNN框架的影响力，当前主流的目标检测模型 ( 例如 Faster-RCNN 和 SSD ) 的作者源码都是基于 Caffe 编写的。 2. Centos7 安装 Caffe虽然">
+<meta name="twitter:title" content="你的模型运行快吗？">
+<meta name="twitter:description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：1y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
+<meta name="twitter:image" content="http://zhongneng.github.io/2018/12/05/model-computation/convolution.png">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://zhongneng.github.io/2018/12/03/centos-caffe/">
+  <link rel="canonical" href="http://zhongneng.github.io/2018/12/05/model-computation/">
 
 
 
 
 
-  <title>Centos7 安装 Caffe | 旅途札记</title>
+  <title>你的模型运行快吗？ | 旅途札记</title>
   
 
 
@@ -263,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhongneng.github.io/2018/12/03/centos-caffe/">
+    <link itemprop="mainEntityOfPage" href="http://zhongneng.github.io/2018/12/05/model-computation/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhong Neng">
@@ -280,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Centos7 安装 Caffe</h1>
+          <h1 class="post-title" itemprop="name headline">你的模型运行快吗？</h1>
         
 
         <div class="post-meta">
@@ -292,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T09:01:08+08:00">
-                2018-12-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T16:22:22+08:00">
+                2018-12-05
               </time>
             
 
@@ -315,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/安装教程/" itemprop="url" rel="index">
-                    <span itemprop="name">安装教程</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -351,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  828
+                  2.1k
                 </span>
               
 
@@ -367,7 +370,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  8
                 </span>
               
             </div>
@@ -388,10 +391,52 @@
       
 
       
-        <h1 id="1-Caffe-是什么"><a href="#1-Caffe-是什么" class="headerlink" title="1. Caffe 是什么"></a>1. Caffe 是什么</h1><p><a href="http://caffe.berkeleyvision.org/" target="_blank" rel="noopener">Caffe</a> 全称 Convolutional Architecture for Fast Feature Embedding，是一种常用的深度学习框架，主要应用在视频、图像处理方面的应用上。得益于RCNN框架的影响力，当前主流的目标检测模型 ( 例如 <a href="https://github.com/ShaoqingRen/faster_rcnn" target="_blank" rel="noopener">Faster-RCNN</a> 和 <a href="https://github.com/weiliu89/caffe" target="_blank" rel="noopener">SSD</a> ) 的作者源码都是基于 Caffe 编写的。</p>
-<h1 id="2-Centos7-安装-Caffe"><a href="#2-Centos7-安装-Caffe" class="headerlink" title="2. Centos7 安装 Caffe"></a>2. Centos7 安装 Caffe</h1><p>虽然网上已经有很多相关的安装教程，但是大多数都是基于 Ubantu 系统的，而且网上的教程在安装过程中往往会报出各种莫名其妙的 bug。经过笔者多次血泪实践，发现大多数错误都是因为未能正确安装 boost 和 protouf 工具包。假设 Centos7 已经正确安装 Nvidia GPU 驱动程序和 CUDA9+CUDNN7的加速包，按照如下教程即可正确编译 Caffe 的 Python3.6 接口。如果电脑没有安装 GPU 驱动，请先参照 Nvidia <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">官网安装教程</a> 正确安装 GPU。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖包</span></span><br><span class="line">$ yum clean all &amp;&amp; yum makecache &amp;&amp; yum install -y epel-release-7-11.noarch </span><br><span class="line">$ yum -y install zlib-devel openssl-devel bzip2-devel expat-devel</span><br><span class="line">$ yum -y install gdbm-devel readline-devel sqlite-devel</span><br><span class="line">$ yum -y install wget git make unzip libSM libXrender libXext</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Python3.6</span></span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; wget https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz</span><br><span class="line">$ tar -xvf Python-3.6.6.tgz &amp;&amp; <span class="built_in">cd</span> Python-3.6.6</span><br><span class="line">$ ./configure --prefix=<span class="variable">$PYINSTALL</span> &amp;&amp; make -j32 &amp;&amp; make install</span><br><span class="line">$ ln -s <span class="variable">$PYINSTALL</span>/bin/python3 <span class="variable">$PYINSTALL</span>/bin/python</span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf Python-3.6.6.tgz Python-3.6.6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 scikit-image</span></span><br><span class="line">$ pip3 install numpy scikit-image -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com </span><br><span class="line"><span class="comment"># 安装 caffe 依赖包</span></span><br><span class="line">$ yum -y install leveldb-devel snappy-devel opencv-devel hdf5-devel </span><br><span class="line">$ yum -y install gflags-devel glog-devel lmdb-devel openblas-devel python36-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译 boost 修复 libboost_python3.so 无法连接的错误</span></span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; wget https://dl.bintray.com/boostorg/release/1.67.0/<span class="built_in">source</span>/boost_1_67_0.tar.gz </span><br><span class="line">$ tar -xvf boost_1_67_0.tar.gz </span><br><span class="line">$ <span class="built_in">cd</span> boost_1_67_0 &amp;&amp; ./bootstrap.sh --with-toolset=gcc </span><br><span class="line">$ ./b2 cflags=<span class="string">'-fPIC'</span> cxxflags=<span class="string">'-fPIC'</span> include=/usr/include/python3.6m &amp;&amp; ./b2 install </span><br><span class="line">$ ln -s /usr/<span class="built_in">local</span>/lib/libboost_python36.so /usr/lib64/libboost_python3.so </span><br><span class="line">$ <span class="built_in">echo</span> /usr/<span class="built_in">local</span>/lib &gt;&gt; /etc/ld.so.conf.d/caffe.conf &amp;&amp; ldconfig </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf boost_1_67_0.tar.gz boost_1_67_0 </span><br><span class="line"></span><br><span class="line"> <span class="comment"># 安装 protobuf</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib'</span> &gt;&gt; /root/.bashrc </span><br><span class="line">$ <span class="built_in">source</span>  ~/.bashrc</span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; wget https://github.com/protocolbuffers/protobuf/releases/download/v3.5.1/protobuf-cpp-3.5.1.zip </span><br><span class="line">$ unzip protobuf-cpp-3.5.1.zip </span><br><span class="line">$ <span class="built_in">cd</span> protobuf-3.5.1 &amp;&amp; ./configure &amp;&amp; make -j32 &amp;&amp; make install </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf protobuf-cpp-3.5.1.zip protobuf-3.5.1 </span><br><span class="line">$ wget https://github.com/protocolbuffers/protobuf/releases/download/v3.5.1/protobuf-python-3.5.1.zip </span><br><span class="line">$ unzip protobuf-python-3.5.1.zip </span><br><span class="line">$ <span class="built_in">cd</span> protobuf-3.5.1/python &amp;&amp; python setup.py build &amp;&amp; python setup.py install </span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; rm -rf protobuf-python-3.5.1.zip protobuf-3.5.1</span><br></pre></td></tr></table></figure></p>
-<p>安装 caffe， 需要修改配置文件 <code>Makefile.config</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 caffe</span></span><br><span class="line">$ <span class="built_in">cd</span> /home &amp;&amp; git <span class="built_in">clone</span> https://github.com/bvlc/caffe.git</span><br><span class="line"><span class="comment"># 将 caffe/Makefile.config.example 文件复制到 /home 路径下，命名为 Makefile.config 并进行修改</span></span><br><span class="line"><span class="comment"># 第05行改为 USE_CUDNN := 1</span></span><br><span class="line"><span class="comment"># 第11行改为 USE_OPENCV := 1</span></span><br><span class="line"><span class="comment"># 第39行改为 CUDA_ARCH :=	-gencode arch=compute_30,code=sm_30 \</span></span><br><span class="line"><span class="comment"># 第51行改为 BLAS := open</span></span><br><span class="line"><span class="comment"># 第55行改为 BLAS_INCLUDE := /usr/include/openblas</span></span><br><span class="line"><span class="comment"># 第56行改为 BLAS_LIB := /usr/lib64</span></span><br><span class="line">$ cp Makefile.config caffe/Makefile.config &amp;&amp; rm -f Makefile.config</span><br><span class="line">$ <span class="built_in">cd</span> caffe &amp;&amp; make -j32 &amp;&amp; make pycaffe -j32</span><br><span class="line">$ cp -r python/caffe /usr/<span class="built_in">local</span>/python3/lib/python3.6/site-packages</span><br><span class="line">$ cp .build_release/lib/* /usr/lib64</span><br></pre></td></tr></table></figure></p>
-<p>在 <code>python</code> 命令窗口中执行 <code>import caffe</code> 查看 caffe 的 python 接口是否编译成功。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证 caffe 是否安装成功</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> caffe</span><br></pre></td></tr></table></figure></p>
+        <blockquote>
+<p>模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度</p>
+</blockquote>
+<h1 id="1-CNN不同层的计算量"><a href="#1-CNN不同层的计算量" class="headerlink" title="1. CNN不同层的计算量"></a>1. CNN不同层的计算量</h1><p>了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。  </p>
+<h2 id="1-1-乘积相加"><a href="#1-1-乘积相加" class="headerlink" title="1.1 乘积相加"></a>1.1 乘积相加</h2><p>神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n-1]</span><br></pre></td></tr></table></figure></p>
+<p>上式中，输入 <code>w</code> 和 <code>x</code> 是两个向量，输出 <code>y</code> 是一个标量 ( 实数 )。在神经网络的卷积层和全连接层中， <code>w</code> 是层学习到的参数，<code>x</code> 就是层的输入，而 <code>y</code> 则是层的输出的一部分，因为典型的层结构有多个输出。其中 <code>w[0]*x[0] + ...</code> 称为一次 <a href="https://en.wikipedia.org/wiki/Multiply%E2%80%93accumulate_operation" target="_blank" rel="noopener">乘积相加操作(multiply-accumulate operations)</a>, 因此两个 <code>n</code> 维向量的点积含有 <code>n</code> 个 MACCs(乘积相加) 计算单元。</p>
+<blockquote>
+<p>Technically speaking there are only n - 1 additions in the above formula, one less than the number of multiplications. Think of the number of MACCs as being an approximation, just like Big-O notation is an approximation of the complexity of an algorithm.</p>
+</blockquote>
+<p>从每秒浮点运算 ( floating point operations per second, FLOPS ) 的角度来看，一次点积操作包含 <code>2n-1</code> 个 FLOPS，因为其中含有 <code>n</code> 次乘法运算和 <code>n-1</code> 次加法运算。</p>
+<h2 id="1-2-全连接层"><a href="#1-2-全连接层" class="headerlink" title="1.2 全连接层"></a>1.2 全连接层</h2><p>在全连接层，所有的输入单元和输出单元相互连接。对于含有 <code>I</code> 个输入值和 <code>J</code> 个输出值的的层，权重 <code>W</code> 存储在 <code>I×J</code> 的矩阵中，因此全连接层的计算可以写作：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">y</span> = matmul(x, W) + b</span><br></pre></td></tr></table></figure></p>
+<p>矩阵乘法是有一系列点乘组合而成的。每一个点乘由输入 <code>x</code> 和矩阵<code>W</code> 的每一列运算得到。因此运算 <code>matmul(x, W)</code> 包含 <code>I×J</code> 个 MACCs 单元，和权重矩阵的元素个数相同。例如卷积层的最后输出为 <code>(512, 7, 7)</code>, 那么经过 <code>faltten</code> 操作后，输入 <code>I=512x7x7</code>。</p>
+<h2 id="1-3-激活函数"><a href="#1-3-激活函数" class="headerlink" title="1.3 激活函数"></a>1.3 激活函数</h2><p>通常层的后面会跟随非线性激活函数，例如 ReLU 或者 sigmoid 函数。由于激活函数没有乘法运算，因此使用 FLOPS 来衡量计算时间。<br>不同激活函数的计算量是不同的。ReLU 激活函数的表达式为：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">y</span> = max(x, <span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在 GPU 上只有一次操作。假设全连接层有 <code>J</code> 个输出单元，ReLU函数进行了 <code>J</code> 次最大值操作，因此含有 <code>J</code> 个 FLOPS 单元。<br>Sigmoid 激活函数表达式为：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="number">1</span> / (<span class="number">1</span> + exp(<span class="name">-x</span>))</span><br></pre></td></tr></table></figure></p>
+<p>由于 Sigmoid 函数包含幂运算，因此计算量比较复杂。通常将加法运算、减法运算、乘法运算、除法运算、幂运算和平方根运算称为一次 FLOPS。Sigmoid 函数中包含四种不同的运算操作，因此含有 4 次 FLOPS。假设全连接层有 <code>J</code> 个输出单元，那么Sigmoid 函数含有 <code>4xJ</code> 个 FLOPS 单元。通常激活函数只占模型总运算量的很小一部分。</p>
+<h2 id="1-3-卷积层"><a href="#1-3-卷积层" class="headerlink" title="1.3 卷积层"></a>1.3 卷积层</h2><p>卷积层的输入和输出不是向量，而是三维 ( <code>Height*Width*Channels</code> ) 的特征图。假定正方形的卷积核边长为 <code>k</code>，那么卷积层不考虑偏置和激活函数的 MACCs 为：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k × k × Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span> × Channels<span class="number">_</span><span class="keyword">out</span></span><br></pre></td></tr></table></figure></p>
+<p>这里使用输出的 <code>Height</code> 和 <code>Width</code> 是因为考虑到卷积时的<code>stride, dilation factors, padding, etc</code>。<br>对于卷积核为为 <code>(3, 3, 128)</code> 且输入为 <code>(112, 112, 64)</code> 的卷积计算， 它的 MACCs 为：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span>× <span class="number">3</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> × <span class="number">128</span> = <span class="number">924844032</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>In this example, we used “same” padding and stride = 1, so that the output feature map has the same size as the input feature map. It’s also common to see convolutional layers use stride = 2, which would have chopped the output feature map size in half, and we would’ve used 56 × 56 instead of 112 × 112 in the above calculation.</p>
+</blockquote>
+<h2 id="1-4-深度可分离卷积"><a href="#1-4-深度可分离卷积" class="headerlink" title="1.4 深度可分离卷积"></a>1.4 深度可分离卷积</h2><p>深度可分离卷积 ( depthwise-separable convolution ) 首先在 <a href="https://arxiv.org/abs/1610.02357" target="_blank" rel="noopener">Xception</a> 中被使用，它将常规的卷积操作分解为 depthwise 卷积与 pointwise 卷积两个部分。该结构和常规提取特征的卷积操作类似，但是参数量和运算成本较低，在轻量级网络 ( <a href="https://arxiv.org/abs/1704.04861" target="_blank" rel="noopener">MobileNet</a> )中十分常见。  </p>
+<p>假设输入层为 <code>(112, 112, 64)</code>，经过 <code>(3, 3, 128)</code>的卷积核，假定使用 <code>same padding</code> 并且 <code>stride=1</code>，使得输入输出特征图大小相同，那么最终得到 <code>(112, 112, 128)</code> 的特征图。常规卷积示意图如下所示。 MACCs 次数为：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span>× <span class="number">3</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> × <span class="number">128</span> = <span class="number">924844032</span></span><br></pre></td></tr></table></figure></p>
+<div align="center"><img src="/2018/12/05/model-computation/convolution.png" alt="卷积示意图" width="400" height="300"></div>
+
+<p>Depthwise Convolution 的每个卷积核只与输入的一个通道进行卷积，卷积核的数量与上一层的通道数相同。因此输入图像经过 depthwise 卷积之后生成 3 个单通道的特征图，如下图所示。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MACCs = K × K × Channels_in × Height_out × Width_out</span><br><span class="line">      = <span class="number">3</span> × <span class="number">3</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> </span><br><span class="line">      = <span class="number">7225344</span></span><br></pre></td></tr></table></figure></p>
+<div align="center"><img src="/2018/12/05/model-computation/depthwise_convolution.png" alt="卷积示意图" width="400" height="300"></div>
+
+<p>Depthwise Convolution 完成后的特征图数量与输入层的通道数相同，无法扩展特征图的数量，而且无法有效利用不同通道在相同空间位置上的特征信息。因此在 depthwise 卷积之后需要 pointwise Convolution 将特征图进行组合生成新的特征图。Pointwise Convolution 的卷积核大小为 <code>1x1</code>。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MACCs = <span class="number">1</span> × <span class="number">1</span> × Channels_in × Height_out × Width_out x Channels_out</span><br><span class="line">      = <span class="number">1</span> × <span class="number">1</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> x <span class="number">128</span> </span><br><span class="line">      = <span class="number">102760448</span></span><br></pre></td></tr></table></figure></p>
+<div align="center"><img src="/2018/12/05/model-computation/pointwise_convolution.png" alt="卷积示意图" width="400" height="300"></div>
+
+<p>因此 depthwise-separable convolution 的 MACCs 为：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MACCs = (K × K × Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span>) + (Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span> × Channels<span class="number">_</span><span class="keyword">out</span>) </span><br><span class="line">      = Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span> × (K × K + Channel<span class="number">_</span><span class="keyword">out</span>)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>The exact factor is <code>K × K × Cout / (K × K + Cout)</code> . It should be pointed out that depthwise convolutions sometimes have a <code>stride &gt; 1</code>, which reduces the dimensions of their output feature map. But a pointwise layer usually has <code>stride = 1</code>, and so its output feature map will always have the same dimensions as the depthwise layer’s.</p>
+</blockquote>
+<h2 id="1-5-批量归一化层"><a href="#1-5-批量归一化层" class="headerlink" title="1.5 批量归一化层"></a>1.5 批量归一化层</h2><p>批量归一化层 ( Batch normalization Layer) 每一个输出的函数表达式可以写为：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = gamma * (<span class="name">y</span> - mean) / sqrt(<span class="name">variance</span> + epsilon) + beta</span><br></pre></td></tr></table></figure></p>
+<p>其中 <code>y</code> 是上一层输出特征图的一个元素，mean 为均值，variance 为方差，epsilon 确保分母不为0，gamma为尺度因子，beta 为偏置。每一个通道都有其对应的值，因此对于通道为 <code>c</code> 的卷积输出层，batch normalization layer 学习的参数量为 <code>4c</code>。<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = gamma * ((x<span class="string">[0]</span>*w<span class="string">[0]</span> + x<span class="string">[1]</span>*w<span class="string">[1]</span> + ... + x<span class="string">[n-1]</span>*w<span class="string">[n-1]</span> + b) - mean) / sqrt(variance + epsilon) + beta</span><br></pre></td></tr></table></figure></p>
+<p>由于在预测过程中移除了 batch normlization layer，因此考虑模型的计算量时可以不用关注正则化层的影响。</p>
+<blockquote>
+<p> This trick only works when the order of the layers is: convolution, batch norm, ReLU — but not when it is: convolution, ReLU, batch norm. The ReLU is a non-linear operation, which messes up the math.</p>
+</blockquote>
+<h2 id="1-6-池化层"><a href="#1-6-池化层" class="headerlink" title="1.6 池化层"></a>1.6 池化层</h2><p>对于 <code>112, 112, 128)</code> 的特征图，如果最大池化的 <code>pooling size = 2</code> 并且 <code>stride = 2</code>，那么 FLOPS 操作数为 <code>112 × 112 × 128 = 1605632</code>。可以看到，池化层的操作数远远少于卷积层的操作数，因此池化层也是网络计算复杂度的舍入误差。</p>
+<h1 id="2-模型耗费的内存"><a href="#2-模型耗费的内存" class="headerlink" title="2. 模型耗费的内存"></a>2. 模型耗费的内存</h1><p>在模型的每一层计算中，硬件设备需要从主存储中读取输入向量或者特征图的值，从主存储中读取权重参数并与输入计算点积，将得到的新向量或者特征图作为结果写入主存储中。这些操作都涉及到大量的内存读写，耗费的时间可能远远大于计算的次数。</p>
+<h2 id="2-1-权重的内存"><a href="#2-1-权重的内存" class="headerlink" title="2.1 权重的内存"></a>2.1 权重的内存</h2><p>层将权重保存在主存储中，这意味着权重参数越少，模型运行速度越快。如前文所述，输入为 <code>I</code> 个神经元和输出为 <code>J</code> 个神经元之间的权重参数为 <code>I x J</code>，加上偏置向量，总的参数为 <code>( I + 1) x J</code>。对于大小为 <code>k</code>，输入通道数为 <code>Channels_in</code>，输出通道数为 <code>Channels_out</code> 的卷积层的参数为 <code>k x k Channels_in x Channels_out</code> 加上偏置向量参数 <code>Channels_out</code>。<br>对于输入 <code>4096</code> 输出为 <code>4096</code>的全连接层，其权重参数量为 <code>(4096 + 1) x 4096 = 16781312</code>。对于输入为 <code>(64, 64, 32)</code> 卷积核为 <code>(3, 3, 48)</code> 的卷积层，其权重参数量为 <code>(3 x 3 x 32 x 48 + 48 = 13872)</code>。可以看到，相比于卷积层，全连接层的参数量相对更多。</p>
+<blockquote>
+<p>Fully-connected and convolutional layers are actually very similar. A convolutional layer is basically a fully-connected layer with the vast majority of the connections set to 0 — each output is only connected to K × K inputs rather than all of them, and all the outputs use the same values for these connections. This is why convolutional layers are so much more efficient about memory, since they don’t store the weights for connections that are not used.</p>
+</blockquote>
 
       
     </div>
@@ -420,12 +465,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/centos-caffe-python3/" rel="tag"># centos caffe python3</a>
-          
-        </div>
-      
 
       
       
@@ -435,8 +474,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/01/hello-world/" rel="next" title="Hello World——利用hexo和github快速搭建个人博客">
-                <i class="fa fa-chevron-left"></i> Hello World——利用hexo和github快速搭建个人博客
+              <a href="/2018/12/04/docker-env/" rel="next" title="Centos7使用Docker快速搭建深度学习环境">
+                <i class="fa fa-chevron-left"></i> Centos7使用Docker快速搭建深度学习环境
               </a>
             
           </div>
@@ -444,10 +483,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/04/docker-env/" rel="prev" title="Centos7使用Docker快速搭建深度学习环境">
-                Centos7使用Docker快速搭建深度学习环境 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -597,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Caffe-是什么"><span class="nav-text">1. Caffe 是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Centos7-安装-Caffe"><span class="nav-text">2. Centos7 安装 Caffe</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-CNN不同层的计算量"><span class="nav-text">1. CNN不同层的计算量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-乘积相加"><span class="nav-text">1.1 乘积相加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-全连接层"><span class="nav-text">1.2 全连接层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-激活函数"><span class="nav-text">1.3 激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-卷积层"><span class="nav-text">1.3 卷积层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-深度可分离卷积"><span class="nav-text">1.4 深度可分离卷积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-批量归一化层"><span class="nav-text">1.5 批量归一化层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-池化层"><span class="nav-text">1.6 池化层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-模型耗费的内存"><span class="nav-text">2. 模型耗费的内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-权重的内存"><span class="nav-text">2.1 权重的内存</span></a></li></ol></li></ol></div>
             
 
           </div>
