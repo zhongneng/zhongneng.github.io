@@ -77,12 +77,12 @@
 
 
 
-<meta name="description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：1y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
+<meta name="description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如： y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你的模型运行快吗？">
 <meta property="og:url" content="http://zhongneng.github.io/2018/12/05/model-computation/index.html">
 <meta property="og:site_name" content="旅途札记">
-<meta property="og:description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：1y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
+<meta property="og:description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如： y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://zhongneng.github.io/2018/12/05/model-computation/convolution.png">
 <meta property="og:image" content="http://zhongneng.github.io/2018/12/05/model-computation/depthwise_convolution.png">
@@ -90,7 +90,7 @@
 <meta property="og:updated_time" content="2018-12-05T11:52:08.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你的模型运行快吗？">
-<meta name="twitter:description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：1y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
+<meta name="twitter:description" content="模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度  1. CNN不同层的计算量了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。   1.1 乘积相加神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如： y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n">
 <meta name="twitter:image" content="http://zhongneng.github.io/2018/12/05/model-computation/convolution.png">
 
 
@@ -355,7 +355,7 @@
                 
                 <span title="字数统计">
                   2.1k
-                </span>
+                </span>字
               
 
               
@@ -371,7 +371,7 @@
                 
                 <span title="阅读时长">
                   8
-                </span>
+                </span>分钟
               
             </div>
           
@@ -395,39 +395,57 @@
 <p>模型占用的存储空间、模型运行时消耗的内存空间、模型运行的速度</p>
 </blockquote>
 <h1 id="1-CNN不同层的计算量"><a href="#1-CNN不同层的计算量" class="headerlink" title="1. CNN不同层的计算量"></a>1. CNN不同层的计算量</h1><p>了解模型计算量的一种简单方法就是计算这个模型总共做了多少次浮点运算。除了计算量，内存带宽也是影响计算效率的重要因素。  </p>
-<h2 id="1-1-乘积相加"><a href="#1-1-乘积相加" class="headerlink" title="1.1 乘积相加"></a>1.1 乘积相加</h2><p>神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n-1]</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-1-乘积相加"><a href="#1-1-乘积相加" class="headerlink" title="1.1 乘积相加"></a>1.1 乘积相加</h2><p>神经网络中的绝大多数操作都是浮点数的乘法进行求和。例如：</p>
+<pre><code class="lang-bash">y = w[0]*x[0] + w[1]*x[1] + w[2]*x[2] + ... + w[n-1]*x[n-1]
+</code></pre>
 <p>上式中，输入 <code>w</code> 和 <code>x</code> 是两个向量，输出 <code>y</code> 是一个标量 ( 实数 )。在神经网络的卷积层和全连接层中， <code>w</code> 是层学习到的参数，<code>x</code> 就是层的输入，而 <code>y</code> 则是层的输出的一部分，因为典型的层结构有多个输出。其中 <code>w[0]*x[0] + ...</code> 称为一次 <a href="https://en.wikipedia.org/wiki/Multiply%E2%80%93accumulate_operation" target="_blank" rel="noopener">乘积相加操作(multiply-accumulate operations)</a>, 因此两个 <code>n</code> 维向量的点积含有 <code>n</code> 个 MACCs(乘积相加) 计算单元。</p>
 <blockquote>
 <p>Technically speaking there are only n - 1 additions in the above formula, one less than the number of multiplications. Think of the number of MACCs as being an approximation, just like Big-O notation is an approximation of the complexity of an algorithm.</p>
 </blockquote>
 <p>从每秒浮点运算 ( floating point operations per second, FLOPS ) 的角度来看，一次点积操作包含 <code>2n-1</code> 个 FLOPS，因为其中含有 <code>n</code> 次乘法运算和 <code>n-1</code> 次加法运算。</p>
-<h2 id="1-2-全连接层"><a href="#1-2-全连接层" class="headerlink" title="1.2 全连接层"></a>1.2 全连接层</h2><p>在全连接层，所有的输入单元和输出单元相互连接。对于含有 <code>I</code> 个输入值和 <code>J</code> 个输出值的的层，权重 <code>W</code> 存储在 <code>I×J</code> 的矩阵中，因此全连接层的计算可以写作：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">y</span> = matmul(x, W) + b</span><br></pre></td></tr></table></figure></p>
-<p>矩阵乘法是有一系列点乘组合而成的。每一个点乘由输入 <code>x</code> 和矩阵<code>W</code> 的每一列运算得到。因此运算 <code>matmul(x, W)</code> 包含 <code>I×J</code> 个 MACCs 单元，和权重矩阵的元素个数相同。例如卷积层的最后输出为 <code>(512, 7, 7)</code>, 那么经过 <code>faltten</code> 操作后，输入 <code>I=512x7x7</code>。</p>
-<h2 id="1-3-激活函数"><a href="#1-3-激活函数" class="headerlink" title="1.3 激活函数"></a>1.3 激活函数</h2><p>通常层的后面会跟随非线性激活函数，例如 ReLU 或者 sigmoid 函数。由于激活函数没有乘法运算，因此使用 FLOPS 来衡量计算时间。<br>不同激活函数的计算量是不同的。ReLU 激活函数的表达式为：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">y</span> = max(x, <span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-<p>在 GPU 上只有一次操作。假设全连接层有 <code>J</code> 个输出单元，ReLU函数进行了 <code>J</code> 次最大值操作，因此含有 <code>J</code> 个 FLOPS 单元。<br>Sigmoid 激活函数表达式为：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="number">1</span> / (<span class="number">1</span> + exp(<span class="name">-x</span>))</span><br></pre></td></tr></table></figure></p>
-<p>由于 Sigmoid 函数包含幂运算，因此计算量比较复杂。通常将加法运算、减法运算、乘法运算、除法运算、幂运算和平方根运算称为一次 FLOPS。Sigmoid 函数中包含四种不同的运算操作，因此含有 4 次 FLOPS。假设全连接层有 <code>J</code> 个输出单元，那么Sigmoid 函数含有 <code>4xJ</code> 个 FLOPS 单元。通常激活函数只占模型总运算量的很小一部分。</p>
-<h2 id="1-3-卷积层"><a href="#1-3-卷积层" class="headerlink" title="1.3 卷积层"></a>1.3 卷积层</h2><p>卷积层的输入和输出不是向量，而是三维 ( <code>Height*Width*Channels</code> ) 的特征图。假定正方形的卷积核边长为 <code>k</code>，那么卷积层不考虑偏置和激活函数的 MACCs 为：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k × k × Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span> × Channels<span class="number">_</span><span class="keyword">out</span></span><br></pre></td></tr></table></figure></p>
-<p>这里使用输出的 <code>Height</code> 和 <code>Width</code> 是因为考虑到卷积时的<code>stride, dilation factors, padding, etc</code>。<br>对于卷积核为为 <code>(3, 3, 128)</code> 且输入为 <code>(112, 112, 64)</code> 的卷积计算， 它的 MACCs 为：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span>× <span class="number">3</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> × <span class="number">128</span> = <span class="number">924844032</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
+<h2 id="1-2-全连接层"><a href="#1-2-全连接层" class="headerlink" title="1.2 全连接层"></a>1.2 全连接层</h2><p>在全连接层，所有的输入单元和输出单元相互连接。对于含有 <code>I</code> 个输入值和 <code>J</code> 个输出值的的层，权重 <code>W</code> 存储在 <code>I×J</code> 的矩阵中，因此全连接层的计算可以写作：</p>
+<pre><code>y = matmul(x, W) + b
+</code></pre><p>矩阵乘法是有一系列点乘组合而成的。每一个点乘由输入 <code>x</code> 和矩阵<code>W</code> 的每一列运算得到。因此运算 <code>matmul(x, W)</code> 包含 <code>I×J</code> 个 MACCs 单元，和权重矩阵的元素个数相同。例如卷积层的最后输出为 <code>(512, 7, 7)</code>, 那么经过 <code>faltten</code> 操作后，输入 <code>I=512x7x7</code>。</p>
+<h2 id="1-3-激活函数"><a href="#1-3-激活函数" class="headerlink" title="1.3 激活函数"></a>1.3 激活函数</h2><p>通常层的后面会跟随非线性激活函数，例如 ReLU 或者 sigmoid 函数。由于激活函数没有乘法运算，因此使用 FLOPS 来衡量计算时间。<br>不同激活函数的计算量是不同的。ReLU 激活函数的表达式为：</p>
+<pre><code>y = max(x, 0)
+</code></pre><p>在 GPU 上只有一次操作。假设全连接层有 <code>J</code> 个输出单元，ReLU函数进行了 <code>J</code> 次最大值操作，因此含有 <code>J</code> 个 FLOPS 单元。<br>Sigmoid 激活函数表达式为：</p>
+<pre><code>y = 1 / (1 + exp(-x))
+</code></pre><p>由于 Sigmoid 函数包含幂运算，因此计算量比较复杂。通常将加法运算、减法运算、乘法运算、除法运算、幂运算和平方根运算称为一次 FLOPS。Sigmoid 函数中包含四种不同的运算操作，因此含有 4 次 FLOPS。假设全连接层有 <code>J</code> 个输出单元，那么Sigmoid 函数含有 <code>4xJ</code> 个 FLOPS 单元。通常激活函数只占模型总运算量的很小一部分。</p>
+<h2 id="1-3-卷积层"><a href="#1-3-卷积层" class="headerlink" title="1.3 卷积层"></a>1.3 卷积层</h2><p>卷积层的输入和输出不是向量，而是三维 ( <code>Height*Width*Channels</code> ) 的特征图。假定正方形的卷积核边长为 <code>k</code>，那么卷积层不考虑偏置和激活函数的 MACCs 为：</p>
+<pre><code>k × k × Channels_in × Height_out × Width_out × Channels_out
+</code></pre><p>这里使用输出的 <code>Height</code> 和 <code>Width</code> 是因为考虑到卷积时的<code>stride, dilation factors, padding, etc</code>。<br>对于卷积核为为 <code>(3, 3, 128)</code> 且输入为 <code>(112, 112, 64)</code> 的卷积计算， 它的 MACCs 为：</p>
+<pre><code>3 × 3 × 64 × 112 × 112 × 128 = 924844032
+</code></pre><blockquote>
 <p>In this example, we used “same” padding and stride = 1, so that the output feature map has the same size as the input feature map. It’s also common to see convolutional layers use stride = 2, which would have chopped the output feature map size in half, and we would’ve used 56 × 56 instead of 112 × 112 in the above calculation.</p>
 </blockquote>
 <h2 id="1-4-深度可分离卷积"><a href="#1-4-深度可分离卷积" class="headerlink" title="1.4 深度可分离卷积"></a>1.4 深度可分离卷积</h2><p>深度可分离卷积 ( depthwise-separable convolution ) 首先在 <a href="https://arxiv.org/abs/1610.02357" target="_blank" rel="noopener">Xception</a> 中被使用，它将常规的卷积操作分解为 depthwise 卷积与 pointwise 卷积两个部分。该结构和常规提取特征的卷积操作类似，但是参数量和运算成本较低，在轻量级网络 ( <a href="https://arxiv.org/abs/1704.04861" target="_blank" rel="noopener">MobileNet</a> )中十分常见。  </p>
-<p>假设输入层为 <code>(112, 112, 64)</code>，经过 <code>(3, 3, 128)</code>的卷积核，假定使用 <code>same padding</code> 并且 <code>stride=1</code>，使得输入输出特征图大小相同，那么最终得到 <code>(112, 112, 128)</code> 的特征图。常规卷积示意图如下所示。 MACCs 次数为：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span>× <span class="number">3</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> × <span class="number">128</span> = <span class="number">924844032</span></span><br></pre></td></tr></table></figure></p>
-<div align="center"><img src="/2018/12/05/model-computation/convolution.png" alt="卷积示意图" width="400" height="300"></div>
+<p>假设输入层为 <code>(112, 112, 64)</code>，经过 <code>(3, 3, 128)</code>的卷积核，假定使用 <code>same padding</code> 并且 <code>stride=1</code>，使得输入输出特征图大小相同，那么最终得到 <code>(112, 112, 128)</code> 的特征图。常规卷积示意图如下所示。 MACCs 次数为：</p>
+<pre><code>3 × 3 × 64 × 112 × 112 × 128 = 924844032
+</code></pre><div align="center"><img src="/2018/12/05/model-computation/convolution.png" alt="卷积示意图" width="400" height="300"></div>
 
-<p>Depthwise Convolution 的每个卷积核只与输入的一个通道进行卷积，卷积核的数量与上一层的通道数相同。因此输入图像经过 depthwise 卷积之后生成 3 个单通道的特征图，如下图所示。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MACCs = K × K × Channels_in × Height_out × Width_out</span><br><span class="line">      = <span class="number">3</span> × <span class="number">3</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> </span><br><span class="line">      = <span class="number">7225344</span></span><br></pre></td></tr></table></figure></p>
-<div align="center"><img src="/2018/12/05/model-computation/depthwise_convolution.png" alt="卷积示意图" width="400" height="300"></div>
+<p>Depthwise Convolution 的每个卷积核只与输入的一个通道进行卷积，卷积核的数量与上一层的通道数相同。因此输入图像经过 depthwise 卷积之后生成 3 个单通道的特征图，如下图所示。</p>
+<pre><code>MACCs = K × K × Channels_in × Height_out × Width_out
+      = 3 × 3 × 64 × 112 × 112 
+      = 7225344
+</code></pre><div align="center"><img src="/2018/12/05/model-computation/depthwise_convolution.png" alt="卷积示意图" width="400" height="300"></div>
 
-<p>Depthwise Convolution 完成后的特征图数量与输入层的通道数相同，无法扩展特征图的数量，而且无法有效利用不同通道在相同空间位置上的特征信息。因此在 depthwise 卷积之后需要 pointwise Convolution 将特征图进行组合生成新的特征图。Pointwise Convolution 的卷积核大小为 <code>1x1</code>。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MACCs = <span class="number">1</span> × <span class="number">1</span> × Channels_in × Height_out × Width_out x Channels_out</span><br><span class="line">      = <span class="number">1</span> × <span class="number">1</span> × <span class="number">64</span> × <span class="number">112</span> × <span class="number">112</span> x <span class="number">128</span> </span><br><span class="line">      = <span class="number">102760448</span></span><br></pre></td></tr></table></figure></p>
-<div align="center"><img src="/2018/12/05/model-computation/pointwise_convolution.png" alt="卷积示意图" width="400" height="300"></div>
+<p>Depthwise Convolution 完成后的特征图数量与输入层的通道数相同，无法扩展特征图的数量，而且无法有效利用不同通道在相同空间位置上的特征信息。因此在 depthwise 卷积之后需要 pointwise Convolution 将特征图进行组合生成新的特征图。Pointwise Convolution 的卷积核大小为 <code>1x1</code>。</p>
+<pre><code>MACCs = 1 × 1 × Channels_in × Height_out × Width_out x Channels_out
+      = 1 × 1 × 64 × 112 × 112 x 128 
+      = 102760448
+</code></pre><div align="center"><img src="/2018/12/05/model-computation/pointwise_convolution.png" alt="卷积示意图" width="400" height="300"></div>
 
-<p>因此 depthwise-separable convolution 的 MACCs 为：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MACCs = (K × K × Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span>) + (Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span> × Channels<span class="number">_</span><span class="keyword">out</span>) </span><br><span class="line">      = Channels<span class="number">_</span><span class="keyword">in</span> × Height<span class="number">_</span><span class="keyword">out</span> × Width<span class="number">_</span><span class="keyword">out</span> × (K × K + Channel<span class="number">_</span><span class="keyword">out</span>)</span><br></pre></td></tr></table></figure></p>
-<blockquote>
+<p>因此 depthwise-separable convolution 的 MACCs 为：</p>
+<pre><code>MACCs = (K × K × Channels_in × Height_out × Width_out) + (Channels_in × Height_out × Width_out × Channels_out) 
+      = Channels_in × Height_out × Width_out × (K × K + Channel_out)
+</code></pre><blockquote>
 <p>The exact factor is <code>K × K × Cout / (K × K + Cout)</code> . It should be pointed out that depthwise convolutions sometimes have a <code>stride &gt; 1</code>, which reduces the dimensions of their output feature map. But a pointwise layer usually has <code>stride = 1</code>, and so its output feature map will always have the same dimensions as the depthwise layer’s.</p>
 </blockquote>
-<h2 id="1-5-批量归一化层"><a href="#1-5-批量归一化层" class="headerlink" title="1.5 批量归一化层"></a>1.5 批量归一化层</h2><p>批量归一化层 ( Batch normalization Layer) 每一个输出的函数表达式可以写为：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = gamma * (<span class="name">y</span> - mean) / sqrt(<span class="name">variance</span> + epsilon) + beta</span><br></pre></td></tr></table></figure></p>
-<p>其中 <code>y</code> 是上一层输出特征图的一个元素，mean 为均值，variance 为方差，epsilon 确保分母不为0，gamma为尺度因子，beta 为偏置。每一个通道都有其对应的值，因此对于通道为 <code>c</code> 的卷积输出层，batch normalization layer 学习的参数量为 <code>4c</code>。<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = gamma * ((x<span class="string">[0]</span>*w<span class="string">[0]</span> + x<span class="string">[1]</span>*w<span class="string">[1]</span> + ... + x<span class="string">[n-1]</span>*w<span class="string">[n-1]</span> + b) - mean) / sqrt(variance + epsilon) + beta</span><br></pre></td></tr></table></figure></p>
-<p>由于在预测过程中移除了 batch normlization layer，因此考虑模型的计算量时可以不用关注正则化层的影响。</p>
+<h2 id="1-5-批量归一化层"><a href="#1-5-批量归一化层" class="headerlink" title="1.5 批量归一化层"></a>1.5 批量归一化层</h2><p>批量归一化层 ( Batch normalization Layer) 每一个输出的函数表达式可以写为：</p>
+<pre><code>z = gamma * (y - mean) / sqrt(variance + epsilon) + beta
+</code></pre><p>其中 <code>y</code> 是上一层输出特征图的一个元素，mean 为均值，variance 为方差，epsilon 确保分母不为0，gamma为尺度因子，beta 为偏置。每一个通道都有其对应的值，因此对于通道为 <code>c</code> 的卷积输出层，batch normalization layer 学习的参数量为 <code>4c</code>。</p>
+<pre><code>z = gamma * ((x[0]*w[0] + x[1]*w[1] + ... + x[n-1]*w[n-1] + b) - mean) / sqrt(variance + epsilon) + beta
+</code></pre><p>由于在预测过程中移除了 batch normlization layer，因此考虑模型的计算量时可以不用关注正则化层的影响。</p>
 <blockquote>
 <p> This trick only works when the order of the layers is: convolution, batch norm, ReLU — but not when it is: convolution, ReLU, batch norm. The ReLU is a non-linear operation, which messes up the math.</p>
 </blockquote>
@@ -483,6 +501,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/13/introduction-ml/" rel="prev" title="机器学习简介">
+                机器学习简介 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -561,7 +583,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -571,10 +593,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">3</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -582,10 +604,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">3</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -1217,6 +1239,8 @@
   
 
   
+  
+
 
   
 
@@ -1231,3 +1255,13 @@
 
 
 
+<!-- google-code-prettify代码高亮 -->
+<!-- <link rel="stylesheet" href="/lib/google-code-prettify/skins/sons-of-obsidian.css" type="text/css"> -->
+<link rel="stylesheet" href="/lib/google-code-prettify/skins/sons-of-obsidian.css" type="text/css">
+<script src="/lib/google-code-prettify/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+  });
+</script>
