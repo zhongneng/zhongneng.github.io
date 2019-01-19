@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="旅途札记">
 <meta property="og:description" content="1. 分发工具 setuptools由于 distutils 无法定义包之间的依赖关系，Python 研究人员开发了增强版的打包工具 setuptools 以便更好的创建和分发 python 包。setuptools 通过添加基本的依赖系统和相关功能，提供了自动包查询程序，用来自动获取包之间的依赖关系，并完成这些包的安装，大大降低了安装各种包的难度。   通常安装 python 时会自带 setu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-19T04:32:54.070Z">
+<meta property="og:updated_time" content="2019-01-19T08:58:53.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用setuptools对Python进行打包分发">
 <meta name="twitter:description" content="1. 分发工具 setuptools由于 distutils 无法定义包之间的依赖关系，Python 研究人员开发了增强版的打包工具 setuptools 以便更好的创建和分发 python 包。setuptools 通过添加基本的依赖系统和相关功能，提供了自动包查询程序，用来自动获取包之间的依赖关系，并完成这些包的安装，大大降低了安装各种包的难度。   通常安装 python 时会自带 setu">
@@ -351,7 +351,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  871
+                  1.8k
                 </span>字
               
 
@@ -367,7 +367,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  7
                 </span>分钟
               
             </div>
@@ -392,44 +392,196 @@
 <p>通常安装 python 时会自带 setuptools，如果没有可以使用 pip 安装。setuptools 简单易用，只需写一个简短的 <code>setup.py</code> 安装文件，就可以将开发完成的 Python 应用打包。</p>
 <pre><code class="lang-bash">$ pip install setuptools
 </code></pre>
-<h1 id="2-使用安装包创建-wheel-文件"><a href="#2-使用安装包创建-wheel-文件" class="headerlink" title="2. 使用安装包创建 wheel 文件"></a>2. 使用安装包创建 wheel 文件</h1><pre><code>.
+<h1 id="2-使用安装包创建-wheel-文件"><a href="#2-使用安装包创建-wheel-文件" class="headerlink" title="2. 使用安装包创建 wheel 文件"></a>2. 使用安装包创建 wheel 文件</h1><p>在当前目录下新建文件 setup.py，然后创建包 hello 模拟需要打包分发的源码包</p>
+<pre><code>.
 +-- hello
 |   +-- hello_world.py
 |   +-- __init__.py
 +-- setup.py
-</code></pre><pre><code>.
+</code></pre><pre><code class="lang-bash">.
 ├── hello
-│   ├── hello_world.py  // hello function 
-│   ├── __init__.py
+│   ├── hello_world.py    # hello function 
+│   └── __init__.py
 └── setup.py
-</code></pre><pre><code class="lang-do">├── build // webpack配置文件
-├── config // 项目打包路径
-├── elm // 上线项目文件，放在服务器即可正常访问
-├── screenshots // 项目截图
-├── src // 源码目录
-│ ├── components // 组件 
-│ │ ├── common // 公共组件 
-│ │ │ ├── alertTip.vue // 弹出框组件 
-│ │ │ ├── buyCart.vue // 购物车组件 
-│ │ │ ├── computeTime.vue // 倒计时组件 
-│ │ │ ├── loading.vue // 页面初始化加载数据的动画组件 
-│ │ │ ├── mixin.js // 组件混合(包括：指令-下拉加载更多，处理图片地址) 
-│ │ │ ├── ratingStar.vue // 评论的五颗星组件 
-│ │ │ └── shoplist.vue // msite和shop页面的餐馆列表公共组件 
-│ │ ├── footer 
-│ │ │ └── footGuide.vue // 底部公共组件 
-│ │ └── header │ │ └── head.vue // 头部公共组件 
-│ ├── config // 基本配置 
-│ │ ├── env.js // 环境切换配置 
-│ │ ├── fetch.js // 获取数据 
-│ │ ├── mUtils.js // 常用的js方法 
-│ │ └── rem.js // px转换rem │ ├── images // 公共图片 │ ├── page │ │ ├── balance │ │ │ ├── balance.vue // 余额页 │ │ │ └── children │ │ │ └── detail.vue // 余额说明 │ │ ├── benefit │ │ │ ├── benefit.vue // 红包页 │ │ │ └── children │ │ │ ├── commend.vue // 推荐有奖 │ │ │ ├── coupon.vue // 代金券说明 │ │ │ ├── exchange.vue // 兑换红包 │ │ │ ├── hbDescription.vue // 红包说明 │ │ │ └── hbHistory.vue // 历史红包 │ │ ├── city
-│ │ │ └── city.vue // 当前城市页 │ │ ├── confirmOrder │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ ├── addAddress.vue // 添加地址页 │ │ │ │ │ └── children │ │ │ │ │ └── searchAddress.vue // 搜索地址页 │ │ │ │ ├── chooseAddress.vue // 选择地址页 │ │ │ │ ├── invoice.vue // 选择发票页 │ │ │ │ ├── payment.vue // 付款页 │ │ │ │ ├── remark.vue // 订单备注页 │ │ │ │ └── userValidation.vue // 用户验证页 │ │ │ └── confirmOrder.vue // 确认订单页 │ │ ├── download │ │ │ └── download.vue // 下载App │ │ ├── find │ │ │ └── find.vue // 发现页 │ │ ├── food │ │ │ └── food.vue // 食品筛选排序页 │ │ ├── forget │ │ │ └── forget.vue // 忘记密码，修改密码页 │ │ ├── home │ │ │ └── home.vue // 首页 │ │ ├── login │ │ │ └── login.vue // 登录注册页 │ │ ├── msite │ │ │ └── msite.vue // 商铺列表页 │ │ ├── order │ │ │ ├── children │ │ │ │ └── orderDetail.vue // 订单详情页 │ │ │ └── order.vue // 订单列表页 │ │ ├── points │ │ │ ├── children │ │ │ │ └── detail.vue // 积分说明 │ │ │ └── points.vue // 积分页 │ │ ├── profile │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ ├── address.vue // 地址 │ │ │ │ │ └── children │ │ │ │ │ ├── add.vue // 新增地址 │ │ │ │ │ └── children │ │ │ │ │ └── addDetail.vue // 搜索地址 │ │ │ │ ├── info.vue // 帐户信息 │ │ │ │ └── setusername.vue // 重置用户名 │ │ │ └── profile.vue // 个人中心 │ │ ├── search │ │ │ └── search.vue // 搜索页 │ │ ├── service │ │ │ ├── children │ │ │ │ └── questionDetail.vue // 问题详情 │ │ │ └── service.vue // 服务中心 │ │ ├── shop │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ └── shopSafe.vue // 商铺认证信息页 │ │ │ │ ├── foodDetail.vue // 商铺信息页 │ │ │ │ └── shopDetail.vue // 单个商铺信息页 │ │ │ └── shop.vue // 商铺筛选页 │ │ └── vipcard │ │ ├── children │ │ │ ├── invoiceRecord.vue // 购买记录 │ │ │ ├── useCart.vue // 使用卡号购买 │ │ │ └── vipDescription.vue // 会员说明 │ │ └── vipcard.vue // 会员卡办理页 │ ├── plugins // 引用的插件 │ ├── router │ │ └── router.js // 路由配置 │ ├── service // 数据交互统一调配 │ │ ├── getData.js // 获取数据的统一调配文件，对接口进行统一管理 │ │ └── tempdata // 开发阶段的临时数据 │ ├── store // vuex的状态管理 │ │ ├── action.js // 配置actions │ │ ├── getters.js // 配置getters │ │ ├── index.js // 引用vuex，创建store │ │ ├── modules // store模块 │ │ ├── mutation-types.js // 定义常量muations名 │ │ └── mutations.js // 配置mutations │ └── style │ ├── common.scss // 公共样式文件 │ ├── mixin.scss // 样式配置文件 │ └── swiper.min.css │ ├── App.vue // 页面入口文件 │ ├── main.js // 程序入口文件，加载各种公共组件 ├── favicon.ico // 图标 ├── index.html // 入口html文件
 </code></pre>
-<pre><code>├─ config
-│  ├─ a.js
-│  ├─ b.js
-│  └─ c.js
+<p>一个最简单的 setup.py 文件内容如下：</p>
+<pre><code class="lang-python">from setuptools import setup
+
+setup(
+    name = &#39;firstPKG&#39;,
+    version = &#39;0.01&#39;,
+    packages=[&#39;hello&#39;],
+)
+</code></pre>
+<p>编辑 <code>hello_world.py</code> 文件</p>
+<pre><code class="lang-python">def hello():
+    print(&#39;Hello world, welcome to setuptools!&#39;)
+</code></pre>
+<p>wheel 是官方现在推荐的打包方式，首先安装 wheel</p>
+<pre><code class="lang-bash">$ pip install wheel
+</code></pre>
+<p>然后使用 bdist_wheel 打包</p>
+<pre><code class="lang-bash">$ python setup.py bdist_wheel
+</code></pre>
+<p>执行成功后，目录下除了 dist 和 *.egg-info 目录外，还有一个 build 目录用于存储打包中间数据。dist 文件夹中 wheel 包的名称如 <code>firstPKG-0.0.1-py3-none-any.whl</code>，其中 py3 指明只支持 Python3。  </p>
+<p>可以使用参数 <code>--universal</code>，包名如 <code>firstPKG-0.0.1-py2.py3-none-any.whl</code>，表明 wheel 包同时支持 Python2 和 Python3。使用 universal 也成为通用 wheel 包，反之称为纯 wheel 包。</p>
+<pre><code class="lang-bash">$ python setup.py bdist_wheel --universal
+</code></pre>
+<p>最终的目录树如下：</p>
+<pre><code>.
+├── build
+│   ├── bdist.linux-x86_64
+│   └── lib
+│       └── my_pkgs
+│           ├── greet.py
+│           └── __init__.py
+├── dist
+│   └── firstPKG-0.0.1-py2.py3-none-any.whl
+├── firstPKG.egg-info
+│   ├── dependency_links.txt
+│   ├── PKG-INFO
+│   ├── SOURCES.txt
+│   └── top_level.txt
+├── my_pkgs
+│   ├── greet.py
+│   ├── __init__.py
+│   └── __pycache__
+│       ├── greet.cpython-36.pyc
+│       └── __init__.cpython-36.pyc
+└── setup.py
+</code></pre><h1 id="3-安装-wheel-文件"><a href="#3-安装-wheel-文件" class="headerlink" title="3. 安装 wheel 文件"></a>3. 安装 wheel 文件</h1><p>创建 wheel 文件之后，使用 pip 安装到本地 Python 的 site-packages 目录。</p>
+<pre><code class="lang-bash">$ cd dist
+$ pip install firstPKG-0.0.1-py2.py3-none-any.whl
+</code></pre>
+<p>进入 python 交互界面，就可以使用安装好的包</p>
+<pre><code class="lang-python">&gt;&gt;&gt; import my_pkgs
+&gt;&gt;&gt; from my_pkgs import greet
+&gt;&gt;&gt; from my_pkgs.greet import hello
+&gt;&gt;&gt; hello
+&lt;function hello at 0x7fe2cd92b598&gt;
+&gt;&gt;&gt; hello()
+Hello, welcome to setuptools!
+</code></pre>
+<p>应用开发过程中会频繁变更，每次安装都需要先卸载旧版本很麻烦。如果使用 <code>develop</code> 开发模式安装，实际代码不会拷贝到 site-packages 目录下，而是在 site-packages 目录下生成一个指向当前应用的链接 <code>firstPKG.egg-link</code>，使得当前位置的源码改动能够立刻反映到 site-packages 中。</p>
+<pre><code class="lang-bash">$ python setup.py develop
+</code></pre>
+<p>卸载安装好的包</p>
+<pre><code class="lang-bash">$ pip uninstall firstPKG
+</code></pre>
+<h1 id="4-将-wheel-文件上传到-PyPI"><a href="#4-将-wheel-文件上传到-PyPI" class="headerlink" title="4. 将 wheel 文件上传到 PyPI"></a>4. 将 wheel 文件上传到 PyPI</h1><p>wheel 包可以自己使用和传输给其他人使用，但是维护更新不方便，而 PyPI 作为 Python 的软件仓库，可以让所有人方便的上传和下载，以及管理三方库。  </p>
+<p>首先登录 <a href="https://pypi.org/" target="_blank" rel="noopener">PyPI官网</a>，注册账号。虽然 setuptools 支持使用 <code>setup.py upload</code> 上传包文件到 PyPI，但只支持 HTTP 而被新的 <font color="#008000">twine</font> 取代。</p>
+<pre><code class="lang-bash">$ pip install twine
+$ twine upload dist/*
+</code></pre>
+<p>输入 username 和 password 即上传至 PyPI。如果不想每次输入账号密码，可以在当前目录下创建 .pypirc 文件，内容如下：</p>
+<pre><code>[distutils]
+index-servers =
+    pypi
+    pypitest
+
+[pypi]
+username: 
+password: 
+
+[pypitest]
+repository: https://test.pypi.org/legacy/
+username: 
+password:
+</code></pre><p>填上自己的账号密码即可，这里配置了官方的 pypi 和 pypitest，若要配置其他仓库，按格式添加。上传成功之后即回到 <a href="https://pypi.org/" target="_blank" rel="noopener">PyPI官网</a> 用户主页即可看到上传的 <code>firstPKG-0.0.1</code>文件。</p>
+<blockquote>
+<p>PyPI 主页显示会有延迟，所以不能马上搜索到结果，pip search 也可能   搜索不到，但已经可以使用 pip 安装。</p>
+</blockquote>
+<h1 id="5-setup-参数详细解释"><a href="#5-setup-参数详细解释" class="headerlink" title="5. setup() 参数详细解释"></a>5. setup() 参数详细解释</h1><h2 id="5-1-完整的-setup-py-示例"><a href="#5-1-完整的-setup-py-示例" class="headerlink" title="5.1 完整的 setup.py 示例"></a>5.1 完整的 setup.py 示例</h2><pre><code class="lang-python">from setuptools import setup
+from setuptools import find_packages
+
+with open(&#39;README.rst&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;) as rd:
+    long_description = rd.read()
+
+setup(
+    # 在 PyPI 上搜索的项目名称。
+    name=&quot;HelloWorld&quot;, 
+    # 项目版本号，一般由三部分组成：MAJOR, MINOR, MAINTENANCE
+    version=&quot;0.0.1&quot;,
+    # 列出项目内需要被打包的所有 package。一般使用 setuptools.find_packages() 自动发现
+    # exclude 用于排除不打包的 package
+    packages=find_packages(exclude=[&#39;contrib&#39;, &#39;docs&#39;, &#39;tests*&#39;]),
+
+    # Project uses reStructuredText, so ensure that the docutils get
+    # installed or upgraded on the target machine
+    # 项目依赖的 Python 库，使用 pip 安装本项目时会自动检查和安装依赖。
+    install_requires=[&#39;docutils&gt;=0.3&#39;],
+    # 指定项目依赖的 Python 版本
+    python_requires=&#39;&gt;=3&#39;,
+    # 项目依赖数据文件，数据文件必须放在项目目录内且使用相对路径。
+    # 如果不指定作为目录的键为空串，则代表对所有模块操作
+    package_data={
+        # If any package contains *.txt or *.rst files, include them:
+        &#39;&#39;: [&#39;*.txt&#39;, &#39;*.rst&#39;],
+        # And include any *.msg files found in the &#39;hello&#39; package, too:
+        &#39;hello&#39;: [&#39;*.msg&#39;],
+    },
+    # 如果数据文件存在于项目外，则可以使用 data_files 参数或者 MANIFEST.in 文件进行管理。
+    # 如果用于源码包，则使用 MANIFEST.in；如果用于 wheel，则使用 data_files。
+    # 上述设置将在打包 wheel 时，将 data/conf.yml 文件添加至 mydata 目录。
+    data_files=[(‘mydata’, [‘data/conf.yml’])],
+
+    # metadata for upload to PyPI
+    # 作者信息
+    author=&quot;example&quot;,
+    author_email=&quot;example@example.com&quot;,
+    # 项目的简短描述，一般一句话就好，会显示在 PyPI 上名字下端。
+    description=&quot;This is an Example Package&quot;,
+    # 对项目的完整描述，使用 long_description。如果此字符串是 rst 格式的，PyPI 会自动渲染成 HTML 显示。
+    long_description = long_description,
+    # 项目许可证
+    license=&quot;GNU GPLv3&quot;,
+    # 项目关键词列表
+    keywords=&quot;hello world example examples&quot;,
+    # project home page 通常为 GitHub上 的链接或者 readthedocs 的链接。
+    url=&quot;http://example.com/HelloWorld/&quot;, 
+    # 项目相关额外连接，如代码仓库，文档地址等
+    project_urls={
+        &quot;Bug Tracker&quot;: &quot;https://bugs.example.com/HelloWorld/&quot;,
+        &quot;Documentation&quot;: &quot;https://docs.example.com/HelloWorld/&quot;,
+        &quot;Source Code&quot;: &quot;https://code.example.com/HelloWorld/&quot;,
+    }
+)
+</code></pre>
+<h2 id="5-2-其他初始化文件"><a href="#5-2-其他初始化文件" class="headerlink" title="5.2 其他初始化文件"></a>5.2 其他初始化文件</h2><p>在阅读 Github 上的 Python 库时，除了最基本核心的 setup.py 文件和主程序之外，还会看到其他一些文件。本节将介绍它们的作用和使用方法。</p>
+<p>(1) setup.cfg<br>包含了构建时候的一些默认参数，例如在使用 bdist_wheel 的时候设置默认的 —universal 参数。</p>
+<pre><code>[bdist_wheel]
+
+universal = 1
+</code></pre><p>(2) README.rst/README.md<br>项目说明文档，使用 reStrutruedText 可以在 PyPI 上很好的渲染，但 Markdown 则支持不够好。</p>
+<p>(3) MANIFEST.in<br>决定 setuptools 打包源码时还需要额外打包哪些文件。</p>
+<pre><code># Include the README
+include *.md
+
+# Include the license file
+include LICENSE.txt
+
+# Include the data files
+recursive-include data *
+</code></pre><p>(4) LICENSE.txt<br>项目许可说明文件</p>
+<p>setuptools 默认打包的文件包括 <code>README.rst/README.md</code>、<code>setup.cfg</code> 和 <code>MANIFEST.in</code>，所有其他文件，如 <code>LICENSE.txt</code>, 使用源码包时需要在 MANIFEST.in 里添加 include，使用 wheel 包时需要在 setup.cfg 添加</p>
+<pre><code>[metadata]
+license_file = LICENSE.txt
+</code></pre><p>PyPI 上传推荐配置</p>
+<pre><code>.
+├── 项目文件夹
+├── LICENSE.txt
+├── MANIFEST.in
+├── README.rst
+├── setup.cfg
+└── setup.py
+    -- name
+    -- version
+    -- author
+    -- author_email
+    -- url
+    -- packages
+    -- description
+    -- package_data/data_files
 </code></pre>
       
     </div>
@@ -631,7 +783,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-分发工具-setuptools"><span class="nav-text">1. 分发工具 setuptools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用安装包创建-wheel-文件"><span class="nav-text">2. 使用安装包创建 wheel 文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-分发工具-setuptools"><span class="nav-text">1. 分发工具 setuptools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用安装包创建-wheel-文件"><span class="nav-text">2. 使用安装包创建 wheel 文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-安装-wheel-文件"><span class="nav-text">3. 安装 wheel 文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-将-wheel-文件上传到-PyPI"><span class="nav-text">4. 将 wheel 文件上传到 PyPI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-setup-参数详细解释"><span class="nav-text">5. setup() 参数详细解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-完整的-setup-py-示例"><span class="nav-text">5.1 完整的 setup.py 示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-其他初始化文件"><span class="nav-text">5.2 其他初始化文件</span></a></li></ol></li></ol></div>
             
 
           </div>
