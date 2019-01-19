@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="机器学习，深度学习，Machine Learning, Deep Learning">
+  <meta name="keywords" content="python,">
 
 
 
@@ -77,17 +77,18 @@
 
 
 
-<meta name="description" content="Machine Learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://zhongneng.github.io/tags/index.html">
+<meta name="description" content="1. 分发工具 setuptools由于 distutils 无法定义包之间的依赖关系，Python 研究人员开发了增强版的打包工具 setuptools 以便更好的创建和分发 python 包。setuptools 通过添加基本的依赖系统和相关功能，提供了自动包查询程序，用来自动获取包之间的依赖关系，并完成这些包的安装，大大降低了安装各种包的难度。   通常安装 python 时会自带 setu">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用setuptools对Python进行打包分发">
+<meta property="og:url" content="http://zhongneng.github.io/2019/01/19/python-setuptools/index.html">
 <meta property="og:site_name" content="旅途札记">
-<meta property="og:description" content="Machine Learning">
+<meta property="og:description" content="1. 分发工具 setuptools由于 distutils 无法定义包之间的依赖关系，Python 研究人员开发了增强版的打包工具 setuptools 以便更好的创建和分发 python 包。setuptools 通过添加基本的依赖系统和相关功能，提供了自动包查询程序，用来自动获取包之间的依赖关系，并完成这些包的安装，大大降低了安装各种包的难度。   通常安装 python 时会自带 setu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T02:07:11.799Z">
+<meta property="og:updated_time" content="2019-01-19T03:27:40.005Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
-<meta name="twitter:description" content="Machine Learning">
+<meta name="twitter:title" content="使用setuptools对Python进行打包分发">
+<meta name="twitter:description" content="1. 分发工具 setuptools由于 distutils 无法定义包之间的依赖关系，Python 研究人员开发了增强版的打包工具 setuptools 以便更好的创建和分发 python 包。setuptools 通过添加基本的依赖系统和相关功能，提供了自动包查询程序，用来自动获取包之间的依赖关系，并完成这些包的安装，大大降低了安装各种包的难度。   通常安装 python 时会自带 setu">
 
 
 
@@ -117,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://zhongneng.github.io/tags/">
+  <link rel="canonical" href="http://zhongneng.github.io/2019/01/19/python-setuptools/">
 
 
 
 
 
-  <title>标签 | 旅途札记</title>
+  <title>使用setuptools对Python进行打包分发 | 旅途札记</title>
   
 
 
@@ -250,40 +251,229 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhongneng.github.io/2019/01/19/python-setuptools/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhong Neng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/picture.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅途札记">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">标签</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 7 个标签
+          <h1 class="post-title" itemprop="name headline">使用setuptools对Python进行打包分发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-19T10:55:22+08:00">
+                2019-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  855
+                </span>字
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>分钟
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/caffe/" style="font-size: 12px; color: #ccc">caffe</a> <a href="/tags/centoe7-深度学习环境/" style="font-size: 12px; color: #ccc">centoe7 深度学习环境</a> <a href="/tags/centos/" style="font-size: 12px; color: #ccc">centos</a> <a href="/tags/hexo-博客/" style="font-size: 12px; color: #ccc">hexo 博客</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/meachine-learning/" style="font-size: 12px; color: #ccc">meachine learning</a> <a href="/tags/python/" style="font-size: 30px; color: #111">python</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="1-分发工具-setuptools"><a href="#1-分发工具-setuptools" class="headerlink" title="1. 分发工具 setuptools"></a>1. 分发工具 setuptools</h1><p>由于 distutils 无法定义包之间的依赖关系，Python 研究人员开发了增强版的打包工具 setuptools 以便更好的创建和分发 python 包。setuptools 通过添加基本的依赖系统和相关功能，提供了自动包查询程序，用来自动获取包之间的依赖关系，并完成这些包的安装，大大降低了安装各种包的难度。  </p>
+<p>通常安装 python 时会自带 setuptools，如果没有可以使用 pip 安装。setuptools 简单易用，只需写一个简短的 <code>setup.py</code> 安装文件，就可以将开发完成的 Python 应用打包。</p>
+<pre><code class="lang-bash">$ pip install setuptools
+</code></pre>
+<h1 id="2-使用安装包创建-wheel-文件"><a href="#2-使用安装包创建-wheel-文件" class="headerlink" title="2. 使用安装包创建 wheel 文件"></a>2. 使用安装包创建 wheel 文件</h1><pre><code>.
++-- hello
+|   +-- hello_world.py
+|   +-- __init__.py
++-- setup.py
+</code></pre><pre><code class="lang-md">├── build // webpack配置文件
+├── config // 项目打包路径
+├── elm // 上线项目文件，放在服务器即可正常访问
+├── screenshots // 项目截图 ├── src // 源码目录 │ ├── components // 组件 │ │ ├── common // 公共组件 │ │ │ ├── alertTip.vue // 弹出框组件 │ │ │ ├── buyCart.vue // 购物车组件 │ │ │ ├── computeTime.vue // 倒计时组件 │ │ │ ├── loading.vue // 页面初始化加载数据的动画组件 │ │ │ ├── mixin.js // 组件混合(包括：指令-下拉加载更多，处理图片地址) │ │ │ ├── ratingStar.vue // 评论的五颗星组件 │ │ │ └── shoplist.vue // msite和shop页面的餐馆列表公共组件 │ │ ├── footer │ │ │ └── footGuide.vue // 底部公共组件 │ │ └── header │ │ └── head.vue // 头部公共组件 │ ├── config // 基本配置 │ │ ├── env.js // 环境切换配置 │ │ ├── fetch.js // 获取数据 │ │ ├── mUtils.js // 常用的js方法 │ │ └── rem.js // px转换rem │ ├── images // 公共图片 │ ├── page │ │ ├── balance │ │ │ ├── balance.vue // 余额页 │ │ │ └── children │ │ │ └── detail.vue // 余额说明 │ │ ├── benefit │ │ │ ├── benefit.vue // 红包页 │ │ │ └── children │ │ │ ├── commend.vue // 推荐有奖 │ │ │ ├── coupon.vue // 代金券说明 │ │ │ ├── exchange.vue // 兑换红包 │ │ │ ├── hbDescription.vue // 红包说明 │ │ │ └── hbHistory.vue // 历史红包 │ │ ├── city
+│ │ │ └── city.vue // 当前城市页 │ │ ├── confirmOrder │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ ├── addAddress.vue // 添加地址页 │ │ │ │ │ └── children │ │ │ │ │ └── searchAddress.vue // 搜索地址页 │ │ │ │ ├── chooseAddress.vue // 选择地址页 │ │ │ │ ├── invoice.vue // 选择发票页 │ │ │ │ ├── payment.vue // 付款页 │ │ │ │ ├── remark.vue // 订单备注页 │ │ │ │ └── userValidation.vue // 用户验证页 │ │ │ └── confirmOrder.vue // 确认订单页 │ │ ├── download │ │ │ └── download.vue // 下载App │ │ ├── find │ │ │ └── find.vue // 发现页 │ │ ├── food │ │ │ └── food.vue // 食品筛选排序页 │ │ ├── forget │ │ │ └── forget.vue // 忘记密码，修改密码页 │ │ ├── home │ │ │ └── home.vue // 首页 │ │ ├── login │ │ │ └── login.vue // 登录注册页 │ │ ├── msite │ │ │ └── msite.vue // 商铺列表页 │ │ ├── order │ │ │ ├── children │ │ │ │ └── orderDetail.vue // 订单详情页 │ │ │ └── order.vue // 订单列表页 │ │ ├── points │ │ │ ├── children │ │ │ │ └── detail.vue // 积分说明 │ │ │ └── points.vue // 积分页 │ │ ├── profile │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ ├── address.vue // 地址 │ │ │ │ │ └── children │ │ │ │ │ ├── add.vue // 新增地址 │ │ │ │ │ └── children │ │ │ │ │ └── addDetail.vue // 搜索地址 │ │ │ │ ├── info.vue // 帐户信息 │ │ │ │ └── setusername.vue // 重置用户名 │ │ │ └── profile.vue // 个人中心 │ │ ├── search │ │ │ └── search.vue // 搜索页 │ │ ├── service │ │ │ ├── children │ │ │ │ └── questionDetail.vue // 问题详情 │ │ │ └── service.vue // 服务中心 │ │ ├── shop │ │ │ ├── children │ │ │ │ ├── children │ │ │ │ │ └── shopSafe.vue // 商铺认证信息页 │ │ │ │ ├── foodDetail.vue // 商铺信息页 │ │ │ │ └── shopDetail.vue // 单个商铺信息页 │ │ │ └── shop.vue // 商铺筛选页 │ │ └── vipcard │ │ ├── children │ │ │ ├── invoiceRecord.vue // 购买记录 │ │ │ ├── useCart.vue // 使用卡号购买 │ │ │ └── vipDescription.vue // 会员说明 │ │ └── vipcard.vue // 会员卡办理页 │ ├── plugins // 引用的插件 │ ├── router │ │ └── router.js // 路由配置 │ ├── service // 数据交互统一调配 │ │ ├── getData.js // 获取数据的统一调配文件，对接口进行统一管理 │ │ └── tempdata // 开发阶段的临时数据 │ ├── store // vuex的状态管理 │ │ ├── action.js // 配置actions │ │ ├── getters.js // 配置getters │ │ ├── index.js // 引用vuex，创建store │ │ ├── modules // store模块 │ │ ├── mutation-types.js // 定义常量muations名 │ │ └── mutations.js // 配置mutations │ └── style │ ├── common.scss // 公共样式文件 │ ├── mixin.scss // 样式配置文件 │ └── swiper.min.css │ ├── App.vue // 页面入口文件 │ ├── main.js // 程序入口文件，加载各种公共组件 ├── favicon.ico // 图标 ├── index.html // 入口html文件
+</code></pre>
+
       
     </div>
     
     
     
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #458B00;font-size:14px;">-------------本文结束  感谢阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/16/python-virtual-env/" rel="next" title="创建python虚拟环境">
+                <i class="fa fa-chevron-left"></i> 创建python虚拟环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -316,8 +506,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -395,6 +594,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-分发工具-setuptools"><span class="nav-text">1. 分发工具 setuptools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用安装包创建-wheel-文件"><span class="nav-text">2. 使用安装包创建 wheel 文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -974,6 +1189,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
