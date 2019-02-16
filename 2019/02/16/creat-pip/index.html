@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="旅途札记">
 <meta property="og:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-16T08:56:24.313Z">
+<meta property="og:updated_time" content="2019-02-16T09:03:06.869Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建私有PIP源">
 <meta name="twitter:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
@@ -390,7 +390,7 @@
       
         <h1 id="1-pip-使用国内源"><a href="#1-pip-使用国内源" class="headerlink" title="1. pip 使用国内源"></a>1. pip 使用国内源</h1><p>PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。</p>
 <blockquote>
-<p>阿里源：<a href="http://mirrors.aliyun.com/pypi/simple" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple</a><br>豆瓣源：<a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a><br>清华源: <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a>  </p>
+<p>阿里源：<a href="http://mirrors.aliyun.com/pypi/simple" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple</a><br>豆瓣源：<a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a><br>清华源：<a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a>  </p>
 </blockquote>
 <p>临时使用国内源 <code>pip install numpy -i http://pypi.douban.com/simple</code>，如果报错则在后面添加 <code>trusted-host</code> 参数。</p>
 <pre><code class="lang-bash">$ pip install numpy -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
@@ -400,7 +400,7 @@
 </code></pre>
 <p>然后添加下载源信息并保存，之后即可正常使用命令从国内源下载并安装 python 包，例如 <code>pip install numpy</code></p>
 <blockquote>
-<p>[global]<br>index-url = <a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a><br>[install]<br>trusted-host = <a href="http://pypi.douban.com" target="_blank" rel="noopener">http://pypi.douban.com</a></p>
+<p>[global]<br>index-url = <a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a><br>[install]<br>trusted-host = pypi.douban.com</p>
 </blockquote>
 <h1 id="2-创建私有的-pip-源"><a href="#2-创建私有的-pip-源" class="headerlink" title="2. 创建私有的 pip 源"></a>2. 创建私有的 pip 源</h1><p>出于安全因素，企业内多数服务器不能访问外网，这些服务可能有安装某些 python package 的需求，所以很有必要搭建企业私有的 <code>pypi</code> 源。</p>
 <h2 id="2-1-使用-pypi-server-创建-pip-源"><a href="#2-1-使用-pypi-server-创建-pip-源" class="headerlink" title="2.1 使用 pypi-server 创建 pip 源"></a>2.1 使用 pypi-server 创建 pip 源</h2><p>连接外网的计算机作为服务器，使用 pypi-server 创建私有 pip 源。该方法简便快捷，但是需要手动下载所需要的安装包，适合独立的小项目使用。</p>
@@ -428,22 +428,23 @@ $ bandersnatch mirror
 # 第11行参数 master 指所同步的下载源
 $ sed -i &quot;3c directory = /home/pypi&quot; /etc/bandersnatch.conf
 $ sed -i &quot;11c master = http://pypi.python.org&quot; /etc/bandersnatch.conf
-# Download and Synchronize, 将官网源修改为豆瓣源
-# bandersnatch/master.py 第39行get函数的作用是下载文件
-# 复制 get 函数并修改为 get_cn 函数
-    def get_cn(self, path, required_serial, **kw):
-        logger.debug(f&quot;Getting {path} (serial {required_serial})&quot;)
-        if not path.startswith((&quot;https://&quot;, &quot;http://&quot;)):
-            path = self.url + path
-        # r = self.session.get(path, timeout=self.timeout, **kw)
-        url_cn = &quot;http://pypi.douban.com&quot;
-        path = path.replace(self.url, url_cn)
-        r = self.session.get(path, timeout=self.timeout, **kw)
-        r.raise_for_status()
-# 将 bandersnatch/package.py 中第357行调用 master.get 方法修改为 master.get_cn
-    r = self.mirror.master.get_cn(url, required_serial=None, stream=True)
-# 重新启动服务
-$ bandersnatch mirror
+</code></pre>
+<p>Download and Synchronize, 并将官网源修改为豆瓣源。bandersnatch/master.py 第39行get函数的作用是下载文件，复制 get 函数并修改为 get_cn 函数</p>
+<pre><code class="lang-python">def get_cn(self, path, required_serial, **kw):
+    logger.debug(f&quot;Getting {path} (serial {required_serial})&quot;)
+    if not path.startswith((&quot;https://&quot;, &quot;http://&quot;)):
+        path = self.url + path
+    # r = self.session.get(path, timeout=self.timeout, **kw)
+    url_cn = &quot;http://pypi.douban.com&quot;
+    path = path.replace(self.url, url_cn)
+    r = self.session.get(path, timeout=self.timeout, **kw)
+    r.raise_for_status()
+</code></pre>
+<p>将 bandersnatch/package.py 中第357行调用 master.get 方法修改为 master.get_cn</p>
+<pre><code class="lang-python">r = self.mirror.master.get_cn(url, required_serial=None, stream=True)
+</code></pre>
+<p>重新启动服务</p>
+<pre><code class="lang-bash">$ bandersnatch mirror
 </code></pre>
 <p>下载和同步需要大量的时间，有时候网速不好可能会中断下载。因此需要监控bandersnatch服务，当下载进程中断时重新启动。<br>创建监控脚本 <code>/home/monitor/bander_snatch.sh</code>，添加如下内容，然后执行该脚 <code>./bander_snatch.sh</code>，如果希望不中断的进行监控，那么执行命令 <code>nohup bander_snatch.sh &amp;</code></p>
 <pre><code class="lang-shell">#!/bin/bash
