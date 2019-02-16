@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="机器学习，深度学习，Machine Learning, Deep Learning">
+  <meta name="keywords" content="python,pip,nginx,">
 
 
 
@@ -77,16 +77,18 @@
 
 
 
-<meta name="description" content="Machine Learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="旅途札记">
-<meta property="og:url" content="http://zhongneng.github.io/tags/hexo-博客/index.html">
+<meta name="description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
+<meta name="keywords" content="python,pip,nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建私有PIP源">
+<meta property="og:url" content="http://zhongneng.github.io/2019/02/16/creat-pip/index.html">
 <meta property="og:site_name" content="旅途札记">
-<meta property="og:description" content="Machine Learning">
+<meta property="og:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-16T08:56:24.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="旅途札记">
-<meta name="twitter:description" content="Machine Learning">
+<meta name="twitter:title" content="创建私有PIP源">
+<meta name="twitter:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
 
 
 
@@ -116,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://zhongneng.github.io/tags/hexo-博客/">
+  <link rel="canonical" href="http://zhongneng.github.io/2019/02/16/creat-pip/">
 
 
 
 
 
-  <title>标签: hexo 博客 | 旅途札记</title>
+  <title>创建私有PIP源 | 旅途札记</title>
   
 
 
@@ -141,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -247,52 +249,399 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>hexo 博客<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhongneng.github.io/2019/02/16/creat-pip/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhong Neng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/picture.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅途札记">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/12/01/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World——利用hexo和github快速搭建个人博客</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">创建私有PIP源</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-01T13:06:51+08:00" content="2018-12-01">
-          12-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T14:12:12+08:00">
+                2019-02-16
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/安装教程/" itemprop="url" rel="index">
+                    <span itemprop="name">安装教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>字
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>分钟
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-pip-使用国内源"><a href="#1-pip-使用国内源" class="headerlink" title="1. pip 使用国内源"></a>1. pip 使用国内源</h1><p>PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。</p>
+<blockquote>
+<p>阿里源：<a href="http://mirrors.aliyun.com/pypi/simple" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple</a><br>豆瓣源：<a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a><br>清华源: <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a>  </p>
+</blockquote>
+<p>临时使用国内源 <code>pip install numpy -i http://pypi.douban.com/simple</code>，如果报错则在后面添加 <code>trusted-host</code> 参数。</p>
+<pre><code class="lang-bash">$ pip install numpy -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+</code></pre>
+<p>如果不想每次使用国内源都添加参数，那么可以修改 pip 配置文件，一劳永逸。首先创建 pip 命令的配置文件 <code>~/.pip/pip.conf</code></p>
+<pre><code class="lang-bash">$ cd ~ &amp;&amp; mkdir .pip &amp;&amp; touch .pip/pip.conf
+</code></pre>
+<p>然后添加下载源信息并保存，之后即可正常使用命令从国内源下载并安装 python 包，例如 <code>pip install numpy</code></p>
+<blockquote>
+<p>[global]<br>index-url = <a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a><br>[install]<br>trusted-host = <a href="http://pypi.douban.com" target="_blank" rel="noopener">http://pypi.douban.com</a></p>
+</blockquote>
+<h1 id="2-创建私有的-pip-源"><a href="#2-创建私有的-pip-源" class="headerlink" title="2. 创建私有的 pip 源"></a>2. 创建私有的 pip 源</h1><p>出于安全因素，企业内多数服务器不能访问外网，这些服务可能有安装某些 python package 的需求，所以很有必要搭建企业私有的 <code>pypi</code> 源。</p>
+<h2 id="2-1-使用-pypi-server-创建-pip-源"><a href="#2-1-使用-pypi-server-创建-pip-源" class="headerlink" title="2.1 使用 pypi-server 创建 pip 源"></a>2.1 使用 pypi-server 创建 pip 源</h2><p>连接外网的计算机作为服务器，使用 pypi-server 创建私有 pip 源。该方法简便快捷，但是需要手动下载所需要的安装包，适合独立的小项目使用。</p>
+<pre><code class="lang-bash"># 安装
+$ pip install pypiserver
+# 创建安装包存储文件夹
+$ mkdir /home/packages
+# copy some source packages or eggs to this directory
+$ cd /home/packages &amp;&amp; pip download numpy
+# 启动，不添加参数默认使用 8080 端口和 packages 文件夹
+$ pypi-server
+# 指定端口和文件夹启动服务
+$ pypi-server -p 9090 /home/packages
+</code></pre>
+<p>无法连接外网的内网计算机作为客户端使用服务器的pip源下载包，假设服务器的 IP 地址为 <code>555.666.777.888</code></p>
+<pre><code class="lang-bash">$ pip install numpy -i http://555.666.777.888:9090/simple --trusted-host 555.666.777.888
+</code></pre>
+<h2 id="2-2-使用-bandersnatch-创建-pip-源"><a href="#2-2-使用-bandersnatch-创建-pip-源" class="headerlink" title="2.2 使用 bandersnatch 创建 pip 源"></a>2.2 使用 bandersnatch 创建 pip 源</h2><p>bandersnatch 能够自动下载和同步官网所有的安装包到本地 packages，需要非常大的存储空间，适合作为公司的私有源供内部多个项目使用。</p>
+<pre><code class="lang-bash"># 安装
+$ pip install bandersnatch
+# 生成配置文件
+$ bandersnatch mirror
+# 修改配置文件 bandersnatch.conf
+# 第3行 directory 参数值同步的 package 在本地存放的位置
+# 第11行参数 master 指所同步的下载源
+$ sed -i &quot;3c directory = /home/pypi&quot; /etc/bandersnatch.conf
+$ sed -i &quot;11c master = http://pypi.python.org&quot; /etc/bandersnatch.conf
+# Download and Synchronize, 将官网源修改为豆瓣源
+# bandersnatch/master.py 第39行get函数的作用是下载文件
+# 复制 get 函数并修改为 get_cn 函数
+    def get_cn(self, path, required_serial, **kw):
+        logger.debug(f&quot;Getting {path} (serial {required_serial})&quot;)
+        if not path.startswith((&quot;https://&quot;, &quot;http://&quot;)):
+            path = self.url + path
+        # r = self.session.get(path, timeout=self.timeout, **kw)
+        url_cn = &quot;http://pypi.douban.com&quot;
+        path = path.replace(self.url, url_cn)
+        r = self.session.get(path, timeout=self.timeout, **kw)
+        r.raise_for_status()
+# 将 bandersnatch/package.py 中第357行调用 master.get 方法修改为 master.get_cn
+    r = self.mirror.master.get_cn(url, required_serial=None, stream=True)
+# 重新启动服务
+$ bandersnatch mirror
+</code></pre>
+<p>下载和同步需要大量的时间，有时候网速不好可能会中断下载。因此需要监控bandersnatch服务，当下载进程中断时重新启动。<br>创建监控脚本 <code>/home/monitor/bander_snatch.sh</code>，添加如下内容，然后执行该脚 <code>./bander_snatch.sh</code>，如果希望不中断的进行监控，那么执行命令 <code>nohup bander_snatch.sh &amp;</code></p>
+<pre><code class="lang-shell">#!/bin/bash
+base_path = $(cd `dirname $0`; pwd)
+while true
+do
+    process_number = `ps -ef | grep &quot;bandersnatch&quot; | grep -v grep | wc -l`
+    if [ $process_number -eq 0 ]
+        then
+        bandersnatch mirror  # 需要重新执行的命令
+        echo `date +%Y-%m-%d` `date +%H:%M:%S` &quot;restart bandersnatch&quot; &gt;&gt; $base_path/bandersnatch.log
+    fi
+    sleep 300  # 每300秒监控一次
+done
+</code></pre>
+<h1 id="3-使用-nginx-发布本地-pip-源"><a href="#3-使用-nginx-发布本地-pip-源" class="headerlink" title="3. 使用 nginx 发布本地 pip 源"></a>3. 使用 nginx 发布本地 pip 源</h1><p>在容器中挂载 pypi 下载包的存储路径，服务器的 IP 地址为 <code>555.666.777.888</code>，容器绑定的主机端口号为 <code>7788</code>，启动 nginx 服务</p>
+<pre><code class="lang-bash">$ docker run -tid -v /home/pypi:/mnt/pypi -p localhost:7788:80 --name nginx_pypi centos:7.5 /bin/bash
+$ docker exec -it nginx_pypi /bin/bash --login
+</code></pre>
+<p>进入容器之后，安装 nginx，修改配置文件，添加 pypi 文件夹，并启动 nginx 服务。</p>
+<h2 id="3-1-安装-nginx"><a href="#3-1-安装-nginx" class="headerlink" title="3.1 安装 nginx"></a>3.1 安装 nginx</h2><pre><code class="lang-bash">$ yum install nginx
+</code></pre>
+<p>在默认情况下，由于 Centos7 中没有 nginx 的下载源，直接使用 yum 无法安装成功。有如下三种解决方案，推荐使用第一种。</p>
+<h3 id="3-1-1-官方yum源"><a href="#3-1-1-官方yum源" class="headerlink" title="3.1.1 官方yum源"></a>3.1.1 官方yum源</h3><pre><code class="lang-bash">$ rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+</code></pre>
+<p>安装完成后，可以在 <code>/etc/yum.repos.d</code> 目录中看到名为 <code>nginx.repo</code> 的文件，其内容如下</p>
+<pre><code class="lang-bash">$ cat /etc/yum.repos.d/nginx.repo
+# 内容如下
+    [nginx]
+    name=nginx repo
+    baseurl=http://nginx.org/packages/centos/7/$basearch/
+    gpgcheck=0
+    enabled=1
+# 重新安装 nginx
+$ yum install -y nginx
+</code></pre>
+<p>安装成功之后即可使用命令 <code>whereis nginx</code> 检查安装目录，nginx各种文件默认路径如下：</p>
+<blockquote>
+<ul>
+<li>(1) Nginx 配置路径： /etc/nginx  </li>
+<li>(2) PID目录：/var/run/nginx.pid  </li>
+<li>(3) 错误日志：/var/log/nginx/error.log  </li>
+<li>(4) 访问日志：/var/log/nginx/access.log  </li>
+<li>(5) 默认站点目录：/usr/share/nginx/html  </li>
+</ul>
+</blockquote>
+<p>事实上，只需要知道 Nginx 配置文件的路径，其他路径均可在 <code>/etc/nginx/nginx.conf</code> 和 <code>/etc/nginx/conf.d/default.conf</code> 中查询到。</p>
+<h3 id="3-1-2-官网方法"><a href="#3-1-2-官网方法" class="headerlink" title="3.1.2 官网方法"></a>3.1.2 官网方法</h3><p>参照 <a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS" target="_blank" rel="noopener">官网</a> 的方法，<br>首先安装依赖文件 <code>yum install yum-utils</code>，然后新建文件 <code>/etc/yum.repos.d/nginx.repo</code>，和4.1中文件相似，添加如下内容。</p>
+<pre><code>[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+</code></pre><p>默认使用 <code>nginx-stable</code> 稳定版本，若要使用 <code>nignx-mainline</code>，则需要修改参数 <code>enabled</code> 的值，若参数 <code>gpgcheck</code> 的值不为0，则需要验证 GPG key。<br>此时，即可重新使用命令 <code>yum install nginx</code> 安装 nginx。</p>
+<h3 id="3-1-3-源码安装"><a href="#3-1-3-源码安装" class="headerlink" title="3.1.3 源码安装"></a>3.1.3 源码安装</h3><pre><code class="lang-bash"># 先检查是否已经安装
+$ find -name nginx
+# 卸载
+$ yum remove nginx
+# 依赖包
+$ yum install gcc-c++
+$ yum install pcre pcre-devel
+$ yum install zlib zlib-devel
+$ yum install openssl openssl-devel
+# 下载源码包
+$ wget http://nginx.org/download/nginx-1.12.2.tar.gz
+$ tar -zxvf nginx-1.12.2.tar.gz
+$ cd nginx-1.12.2
+$ ./configure &amp;&amp; make &amp;&amp; make install
+# 启动 nginx
+$ cd /usr/local/nginx/sbin &amp;&amp; ./nginx
+</code></pre>
+<h2 id="3-2-Nginx常用命令"><a href="#3-2-Nginx常用命令" class="headerlink" title="3.2 Nginx常用命令"></a>3.2 Nginx常用命令</h2><pre><code class="lang-bash"># 启动
+$ nginx
+# 测试Nginx配置是否正确
+$ nginx -t
+# 优雅重启
+$ nginx -s reload
+# 查看nginx进程号
+$ ps -ef | grep nginx
+# 停止
+$ nginx -s stop
+</code></pre>
+<p>如果启动 Nginx 时端口被占用，使用如下命令关闭 nginx 进程</p>
+<pre><code class="lang-bash">$ yum install psmisc
+$ killall -9 nginx
+</code></pre>
+<h2 id="3-3-配置-nginx-服务"><a href="#3-3-配置-nginx-服务" class="headerlink" title="3.3 配置 nginx 服务"></a>3.3 配置 nginx 服务</h2><p>修改文件 <code>/etc/nginx/nginx.conf</code>，在 http 服务器模块添加 <code>server{}</code> 中的内容</p>
+<pre><code class="lang-bash">http {
+    ...
+    # gzip on;
+    # include /etc/nginx/conf.d/*.conf;
+
+    server {
+        listen *:80;               # 监听端口
+        server_name localhost;     # 服务器IP地址
+        root /home/pypi/web;       # python包存储路径
+        autoindex on;
+        charset utf-8;
+    }   
+}
+</code></pre>
+<p>配置完成后即可启动 nginx 服务</p>
+<pre><code class="lang-bash">$ nginx
+</code></pre>
+<h1 id="4-客户端-pip-配置文件"><a href="#4-客户端-pip-配置文件" class="headerlink" title="4. 客户端 pip 配置文件"></a>4. 客户端 pip 配置文件</h1><p>创建 pip 命令配置文件 <code>~/.pip/pip.conf</code></p>
+<pre><code class="lang-bash">$ cd &amp;&amp; mkdir .pip &amp;&amp; touch .pip/pip.conf
+</code></pre>
+<p>添加下载源</p>
+<blockquote>
+<p>[global]<br>index-url = <a href="http://555.666.777.888:7788/simple" target="_blank" rel="noopener">http://555.666.777.888:7788/simple</a><br>[install]<br>trusted-host = 555.666.777.888</p>
+</blockquote>
+<p>在没有连接外网的客户端使用 pip 命令下载 python 包</p>
+<pre><code class="lang-bash">$ pip install numpy
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #458B00;font-size:14px;">-------------本文结束  感谢阅读-------------</div>
+    
+</div>
 
       
     </div>
 
+    
+
+
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/pip/" rel="tag"># pip</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/19/python-setuptools/" rel="next" title="使用setuptools对Python进行打包分发">
+                <i class="fa fa-chevron-left"></i> 使用setuptools对Python进行打包分发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -300,6 +649,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -320,8 +673,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -399,6 +761,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-pip-使用国内源"><span class="nav-text">1. pip 使用国内源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-创建私有的-pip-源"><span class="nav-text">2. 创建私有的 pip 源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-使用-pypi-server-创建-pip-源"><span class="nav-text">2.1 使用 pypi-server 创建 pip 源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-使用-bandersnatch-创建-pip-源"><span class="nav-text">2.2 使用 bandersnatch 创建 pip 源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-使用-nginx-发布本地-pip-源"><span class="nav-text">3. 使用 nginx 发布本地 pip 源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-安装-nginx"><span class="nav-text">3.1 安装 nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-官方yum源"><span class="nav-text">3.1.1 官方yum源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-官网方法"><span class="nav-text">3.1.2 官网方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-源码安装"><span class="nav-text">3.1.3 源码安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Nginx常用命令"><span class="nav-text">3.2 Nginx常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-配置-nginx-服务"><span class="nav-text">3.3 配置 nginx 服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-客户端-pip-配置文件"><span class="nav-text">4. 客户端 pip 配置文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -585,6 +963,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
