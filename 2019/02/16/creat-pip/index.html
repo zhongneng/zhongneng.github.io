@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="旅途札记">
 <meta property="og:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-16T09:03:06.869Z">
+<meta property="og:updated_time" content="2019-02-18T02:44:18.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建私有PIP源">
 <meta name="twitter:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
@@ -435,7 +435,8 @@ $ sed -i &quot;11c master = http://pypi.python.org&quot; /etc/bandersnatch.conf
     if not path.startswith((&quot;https://&quot;, &quot;http://&quot;)):
         path = self.url + path
     # r = self.session.get(path, timeout=self.timeout, **kw)
-    url_cn = &quot;http://pypi.douban.com&quot;
+    # url_cn = &quot;http://pypi.douban.com&quot;
+    url_cn = &quot;http://mirrors.aliyun.com/pypi/simple&quot;
     path = path.replace(self.url, url_cn)
     r = self.session.get(path, timeout=self.timeout, **kw)
     r.raise_for_status()
