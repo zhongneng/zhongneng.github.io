@@ -86,7 +86,7 @@
 <meta property="og:description" content="1.  绘制 detectron 目标检测的 loss-accuracy 曲线首先使用 tee 命令将训练日志重定向到日志文件 train_info.log $ python tools/train_net.py --cfg experiment/fast_rcnn_resnet50_FPN.yaml OUTPUT_DIR experiment/detectron_result | tee exp">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://zhongneng.github.io/2019/03/02/detectron-plot-loss/loss_accuracy.png">
-<meta property="og:updated_time" content="2019-03-02T07:42:22.413Z">
+<meta property="og:updated_time" content="2019-03-05T02:20:56.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Detectron 目标检测结果可视化">
 <meta name="twitter:description" content="1.  绘制 detectron 目标检测的 loss-accuracy 曲线首先使用 tee 命令将训练日志重定向到日志文件 train_info.log $ python tools/train_net.py --cfg experiment/fast_rcnn_resnet50_FPN.yaml OUTPUT_DIR experiment/detectron_result | tee exp">
@@ -353,7 +353,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  334
+                  356
                 </span>字
               
 
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>分钟
               
             </div>
@@ -444,6 +444,12 @@ with open(log_file) as f:
 <p><code>loss-accuracy</code> 曲线的图形示例如下</p>
 <div align="center"><img src="/2019/03/02/detectron-plot-loss/loss_accuracy.png" alt="Loss-Accuracy 曲线图" width="400" height="300"></div>
 
+
+<h1 id="2-检测结果可视化"><a href="#2-检测结果可视化" class="headerlink" title="2. 检测结果可视化"></a>2. 检测结果可视化</h1><pre><code class="lang-bash">$ python tools/visualize_results.py \
+      --dataset experiment_val \
+      --detections experiment/detections.pkl \
+      --output-dir experiment/result_jpg
+</code></pre>
 
       
     </div>
@@ -645,7 +651,7 @@ with open(log_file) as f:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-绘制-detectron-目标检测的-loss-accuracy-曲线"><span class="nav-text">1.  绘制 detectron 目标检测的 loss-accuracy 曲线</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-绘制-detectron-目标检测的-loss-accuracy-曲线"><span class="nav-text">1.  绘制 detectron 目标检测的 loss-accuracy 曲线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-检测结果可视化"><span class="nav-text">2. 检测结果可视化</span></a></li></ol></div>
             
 
           </div>
