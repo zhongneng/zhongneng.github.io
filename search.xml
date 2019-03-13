@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[windows 安装 coco API]]></title>
+    <url>%2F2019%2F03%2F13%2Fwindows-coco-api%2F</url>
+    <content type="text"><![CDATA[Linux 安装 COCO API 极为简单，但是由于官方的 COCO API 安装包不提供 Windows 支持，因此使用大神修改过的支持 Windows 版本的安装包。 # 下载 $ wget https://github.com/philferriere/cocoapi/archive/master.zip # 解压 $ unzip master.zip -d cocoapi_master # 编译 $ cd coco/PythonAPI $ python setup.py build_ext --inplace # install pycocotools to the Python site-packages $ python setup.py build_ext install]]></content>
+      <categories>
+        <category>目标检测</category>
+      </categories>
+      <tags>
+        <tag>coco API</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Detectron 目标检测结果可视化]]></title>
     <url>%2F2019%2F03%2F02%2Fdetectron-plot-loss%2F</url>
     <content type="text"><![CDATA[1. 绘制 detectron 目标检测的 loss-accuracy 曲线首先使用 tee 命令将训练日志重定向到日志文件 train_info.log $ python tools/train_net.py --cfg experiment/fast_rcnn_resnet50_FPN.yaml OUTPUT_DIR experiment/detectron_result | tee experiment/train_info.log 训练日志的主要内容为 json_stats: { &quot;accuracy_cls&quot;: 0.000000, &quot;eta&quot;: &quot;29 days, 16:00:50&quot;, &quot;iter&quot;: 0, &quot;loss&quot;: 6.594362, ... &quot;lr&quot;: 0.003333, &quot;mb_qsize&quot;: 64, &quot;mem&quot;: 9376, &quot;time&quot;: 14.240279 } 根据训练日志绘制 loss-accuracy 曲线的 python 脚本如下： import json import re import matplotlib.pyplot as plt import numpy as np log_file = &#39;experiment/train_info.log&#39; with open(log_file) as f: # 提取信息 pattern = re.compile(&#39;json_stats: {.*}&#39;) info_list = pattern.findall(f.read()) parsed = None try: parsed = [json.loads(&#39;{&#39; + string.split(&#39;{&#39;)[1]) for string in info_list] except: print(&#39;Json format is not correct !!!&#39;) exit(1) if parsed: iter = np.array([int(string[&#39;iter&#39;]) for string in parsed]) loss = np.array([int(string[&#39;loss&#39;]) for string in parsed]) accuracy = np.array([float(string[&#39;accuracy_cls&#39;]) for string in parsed]) # 绘制图形 plt.figure(&#39;Figure of Loss-Accuracy&#39;, figsize=(8,6), frameon=True) plt.plot(iter, accuracy, color=&#39;red&#39;, linestyle=&#39;--&#39;, linewidth=1, label=&quot;accuracy&quot;) plt.plot(iter, loss, &#39;b-&#39;, lw=1, label=&#39;loss&#39;) plt.xlim((iter[0], len(iter))) plt.ylim((0, max(loss))) plt.title(&#39;The Information of Loss and Accuracy&#39;, color=&#39;green&#39;) plt.legend(loc=&#39;upper right&#39;) plt.show() else: print(&#39;There is no loss information in file &quot;{:s}&quot;.format(log_name)&#39;) loss-accuracy 曲线的图形示例如下 2. 检测结果可视化$ python tools/visualize_results.py \ --dataset experiment_val \ --detections experiment/detections.pkl \ --output-dir experiment/result_jpg]]></content>
