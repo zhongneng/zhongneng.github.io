@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="旅途札记">
 <meta property="og:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T02:44:18.472Z">
+<meta property="og:updated_time" content="2019-03-14T04:08:44.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建私有PIP源">
 <meta name="twitter:description" content="1. pip 使用国内源PIP 命令默认使用国外源，但是下载速度太慢，不仅浪费时间，而且可能出现下载后安装出错的情况。因此将pip安装源替换成国内镜像，不仅可以大幅降低下载时间，还能够提高安装成功率。国内主要镜像源如下，注意当http下载失败时尝试更换https。  阿里源：http://mirrors.aliyun.com/pypi/simple豆瓣源：http://pypi.douban.co">
@@ -462,7 +462,7 @@ do
 done
 </code></pre>
 <h1 id="3-使用-nginx-发布本地-pip-源"><a href="#3-使用-nginx-发布本地-pip-源" class="headerlink" title="3. 使用 nginx 发布本地 pip 源"></a>3. 使用 nginx 发布本地 pip 源</h1><p>在容器中挂载 pypi 下载包的存储路径，服务器的 IP 地址为 <code>555.666.777.888</code>，容器绑定的主机端口号为 <code>7788</code>，启动 nginx 服务</p>
-<pre><code class="lang-bash">$ docker run -tid -v /home/pypi:/mnt/pypi -p localhost:7788:80 --name nginx_pypi centos:7.5 /bin/bash
+<pre><code class="lang-bash">$ docker run -tid -v /home/pypi:/mnt/pypi -p 7788:80 --name nginx_pypi centos:7.5 /bin/bash
 $ docker exec -it nginx_pypi /bin/bash --login
 </code></pre>
 <p>进入容器之后，安装 nginx，修改配置文件，添加 pypi 文件夹，并启动 nginx 服务。</p>
@@ -706,7 +706,7 @@ $ killall -9 nginx
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -728,7 +728,7 @@ $ killall -9 nginx
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
